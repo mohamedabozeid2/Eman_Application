@@ -6,26 +6,26 @@ part of 'surah_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SurahModelAdapter extends TypeAdapter<SurahModel> {
+class SurahModelAdapter extends TypeAdapter<Surah> {
   @override
   final int typeId = 2;
 
   @override
-  SurahModel read(BinaryReader reader) {
+  Surah read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return SurahModel(
+    return Surah(
       name: fields[1] as String,
-      ayahs: (fields[3] as List).cast<AyahModel>(),
+      ayahs: (fields[3] as List).cast<Ayah>(),
       number: fields[0] as int,
       englishName: fields[2] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, SurahModel obj) {
+  void write(BinaryWriter writer, Surah obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)

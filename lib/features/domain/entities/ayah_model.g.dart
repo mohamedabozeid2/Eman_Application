@@ -6,17 +6,17 @@ part of 'ayah_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AyahModelAdapter extends TypeAdapter<AyahModel> {
+class AyahModelAdapter extends TypeAdapter<Ayah> {
   @override
   final int typeId = 3;
 
   @override
-  AyahModel read(BinaryReader reader) {
+  Ayah read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return AyahModel(
+    return Ayah(
       number: fields[0] as int,
       page: fields[3] as int,
       text: fields[1] as String,
@@ -25,7 +25,7 @@ class AyahModelAdapter extends TypeAdapter<AyahModel> {
   }
 
   @override
-  void write(BinaryWriter writer, AyahModel obj) {
+  void write(BinaryWriter writer, Ayah obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)

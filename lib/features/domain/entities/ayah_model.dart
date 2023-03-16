@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 part 'ayah_model.g.dart';
 
 @HiveType(typeId: 3)
-class AyahModel extends HiveObject with EquatableMixin {
+class Ayah extends HiveObject with EquatableMixin {
   @HiveField(0)
   final int number;
   @HiveField(1)
@@ -14,7 +14,7 @@ class AyahModel extends HiveObject with EquatableMixin {
   @HiveField(3)
   final int page;
 
-  AyahModel({
+  Ayah({
     required this.number,
     required this.page,
     required this.text,

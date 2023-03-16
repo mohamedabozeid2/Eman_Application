@@ -7,7 +7,7 @@ import '../../features/domain/entities/surah_model.dart';
 import 'hive_keys.dart';
 
 class HiveHelper {
-  static Box<QuranDataModel>? surahs;
+  static Box<QuranData>? surahs;
   static late Box<bool> isQuranDownloaded;
 
   static Future<void> init({required String path}) async {
@@ -20,7 +20,7 @@ class HiveHelper {
     Hive.registerAdapter(AyahModelAdapter());
 
     //// Open Boxes
-    surahs = await Hive.openBox<QuranDataModel>(HiveKeys.surahs);
+    surahs = await Hive.openBox<QuranData>(HiveKeys.surahs);
     isQuranDownloaded = await Hive.openBox<bool>(HiveKeys.isQuranDownloaded);
   }
 
@@ -42,12 +42,12 @@ class HiveHelper {
   static Future<void> putQuran({
     required Box box,
     required String key,
-    required QuranDataModel quran,
+    required QuranData quran,
   }) async {
     return await box.put(key, quran);
   }
 
-  static QuranDataModel getQuran({
+  static QuranData getQuran({
     required Box box,
     required String key,
   }) {

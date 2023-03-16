@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class EmanDioHelper{
+class RadioDioHelper{
   static Dio? dio;
 
   static init(){

@@ -6,11 +6,11 @@ import 'surah_model.dart';
 part 'quran_data_model.g.dart';
 
 @HiveType(typeId: 1)
-class QuranDataModel extends HiveObject with EquatableMixin {
+class QuranData extends HiveObject with EquatableMixin {
   @HiveField(0)
-  List<SurahModel> surahs = [];
+  List<Surah> surahs = [];
 
-  QuranDataModel({required this.surahs});
+  QuranData({required this.surahs});
 
   @override
   // TODO: implement props

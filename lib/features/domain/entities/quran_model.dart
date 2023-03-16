@@ -6,15 +6,15 @@ import 'quran_data_model.dart';
 part 'quran_model.g.dart';
 
 @HiveType(typeId: 0)
-class QuranModel extends HiveObject with EquatableMixin {
+class Quran extends HiveObject with EquatableMixin {
   @HiveField(0)
   final int statusCode;
   @HiveField(1)
   final String statusMessage;
   @HiveField(2)
-  final QuranDataModel quranDataModel;
+  final QuranData quranDataModel;
 
-  QuranModel({
+  Quran({
     required this.quranDataModel,
     required this.statusMessage,
     required this.statusCode,

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'config/themes/light_theme.dart';
+import 'core/services/service_locator.dart';
 import 'core/utils/strings.dart';
 
 class EmanApplication extends StatelessWidget {
@@ -24,7 +26,10 @@ class EmanApplication extends StatelessWidget {
       builder: (context, child) {
         return MultiBlocProvider(
             providers: [
-              BlocProvider(create: (BuildContext context) => MainCubit()),
+              BlocProvider(
+                  create: (BuildContext context) => MainCubit(
+                        sl(),
+                      )),
             ],
             child: GetMaterialApp(
               useInheritedMediaQuery: true,
@@ -32,8 +37,8 @@ class EmanApplication extends StatelessWidget {
               builder: DevicePreview.appBuilder,
               debugShowCheckedModeBanner: false,
               title: AppStrings.appName,
-              // theme: darkTheme,
-              // darkTheme: darkTheme,
+              theme: ThemeData.light(),
+              darkTheme: lightTheme,
               themeMode: ThemeMode.dark,
               home: child,
             ));

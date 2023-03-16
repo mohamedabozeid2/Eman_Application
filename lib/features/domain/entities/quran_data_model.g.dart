@@ -6,23 +6,23 @@ part of 'quran_data_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class QuranDataModelAdapter extends TypeAdapter<QuranDataModel> {
+class QuranDataModelAdapter extends TypeAdapter<QuranData> {
   @override
   final int typeId = 1;
 
   @override
-  QuranDataModel read(BinaryReader reader) {
+  QuranData read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return QuranDataModel(
-      surahs: (fields[0] as List).cast<SurahModel>(),
+    return QuranData(
+      surahs: (fields[0] as List).cast<Surah>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, QuranDataModel obj) {
+  void write(BinaryWriter writer, QuranData obj) {
     writer
       ..writeByte(1)
       ..writeByte(0)

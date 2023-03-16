@@ -6,7 +6,7 @@ import 'ayah_model.dart';
 part 'surah_model.g.dart';
 
 @HiveType(typeId: 2)
-class SurahModel extends HiveObject with EquatableMixin {
+class Surah extends HiveObject with EquatableMixin {
   @HiveField(0)
   final int number;
   @HiveField(1)
@@ -14,9 +14,9 @@ class SurahModel extends HiveObject with EquatableMixin {
   @HiveField(2)
   final String englishName;
   @HiveField(3)
-  List<AyahModel> ayahs = [];
+  List<Ayah> ayahs = [];
 
-  SurahModel({
+  Surah({
     required this.name,
     required this.ayahs,
     required this.number,
