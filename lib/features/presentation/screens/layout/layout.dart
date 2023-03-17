@@ -1,5 +1,4 @@
 import 'package:eman_application/core/utils/helper.dart';
-import 'package:eman_application/core/utils/strings.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -29,11 +28,11 @@ class _LayoutState extends State<Layout> {
       Helper.maxWidth = constraints.maxWidth;
       Helper.maxHeight = constraints.maxHeight;
       return Scaffold(
-        appBar: AppBar(
-          title: const Text(AppStrings.appName),
-          toolbarHeight: Helper.maxHeight * 0.12,
-        ),
-        body: const MainScreen(),
+        // appBar: AppBar(
+        //   // title: const Text(AppStrings.appName),
+        //   toolbarHeight: Helper.maxHeight * 0.08,
+        // ),
+        body: MainScreen(),
       );
     });
   }

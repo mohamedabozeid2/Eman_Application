@@ -62,5 +62,5 @@ ThemeData lightTheme = ThemeData(
     titleSpacing: 20.0,
     centerTitle: true,
   ),
-  scaffoldBackgroundColor: AppColors.mainColor.withOpacity(0.3),
+  scaffoldBackgroundColor: AppColors.tealColor.withOpacity(0.8),
 );
