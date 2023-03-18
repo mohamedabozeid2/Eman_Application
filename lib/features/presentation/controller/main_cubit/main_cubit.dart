@@ -12,6 +12,8 @@ import 'package:eman_application/features/presentation/controller/main_cubit/mai
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../domain/entities/surah_bookmark_model.dart';
+import '../../../domain/entities/surah_model.dart';
 import '../../../domain/use_cases/get_quran.dart';
 
 class MainCubit extends Cubit<MainStates> {
@@ -62,5 +64,21 @@ class MainCubit extends Cubit<MainStates> {
 
   Future<Either<Failure, Quran>> callQuran() async {
     return await getQuranUseCase.execute();
+  }
+
+  void saveLastRead({
+  required ScrollController scrollController,
+    required Surah surah,
+}){
+    HiveHelper.putSurahLastRead(
+      model: SurahBookmarkModel(
+          scrollPosition: scrollController.position.pixels,
+          surah: surah),
+    );
+    lastRead = SurahBookmarkModel(
+      scrollPosition: scrollController.position.pixels,
+      surah: surah,
+    );
+    emit(AddToLastReadSuccessState());
   }
 }

@@ -82,18 +82,25 @@ class _MainScreenState extends State<MainScreen> {
                           SizedBox(
                             height: AppSize.s20,
                           ),
-                          lastRead == null
-                              ? Container()
-                              : NavigatorTap(
-                            navigatorTapModel: NavigatorTapModel(
-                              title: AppStrings.lastRead,
-                              firstColor: tapsColors[6],
-                              secondColor: tapsColors[7],
-                              image: AssetsManager.lantern,
-                              pathWidget:
-                              SurahScreen(surah: lastRead!.surah,fromLastRead: true),
-                            ),
-                            fromLastRead: true,
+                          BlocConsumer<MainCubit, MainStates>(
+                            buildWhen: (previous, current) => current is AddToLastReadSuccessState,
+                            listener: (context, state){},
+                            builder: (context, state){
+                              return lastRead == null
+                                  ? Container()
+                                  : NavigatorTap(
+                                navigatorTapModel: NavigatorTapModel(
+                                  title: AppStrings.lastRead,
+                                  firstColor: tapsColors[6],
+                                  secondColor: tapsColors[7],
+                                  image: AssetsManager.lantern,
+                                  pathWidget: SurahScreen(
+                                      surah: lastRead!.surah,
+                                      fromLastRead: true),
+                                ),
+                                fromLastRead: true,
+                              );
+                            },
                           ),
                           GridView.count(
                             crossAxisCount: 2,

@@ -1,8 +1,7 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:eman_application/core/hive/hive_helper.dart';
 import 'package:eman_application/core/utils/assets_manager.dart';
 import 'package:eman_application/core/utils/constants.dart';
-import 'package:eman_application/features/domain/entities/surah_bookmark_model.dart';
+import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_fonts.dart';
@@ -42,15 +41,19 @@ class _SurahScreenState extends State<SurahScreen> {
         scrollController.jumpTo(lastRead!.scrollPosition);
       }
       scrollController.position.isScrollingNotifier.addListener(() {
-        HiveHelper.putSurahLastRead(
-          model: SurahBookmarkModel(
-              scrollPosition: scrollController.position.pixels,
-              surah: widget.surah),
-        );
-        lastRead = SurahBookmarkModel(
-          scrollPosition: scrollController.position.pixels,
+        MainCubit.get(context).saveLastRead(
+          scrollController: scrollController,
           surah: widget.surah,
         );
+        // HiveHelper.putSurahLastRead(
+        //   model: SurahBookmarkModel(
+        //       scrollPosition: scrollController.position.pixels,
+        //       surah: widget.surah),
+        // );
+        // lastRead = SurahBookmarkModel(
+        //   scrollPosition: scrollController.position.pixels,
+        //   surah: widget.surah,
+        // );
       });
     });
 
@@ -59,6 +62,7 @@ class _SurahScreenState extends State<SurahScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: null,
