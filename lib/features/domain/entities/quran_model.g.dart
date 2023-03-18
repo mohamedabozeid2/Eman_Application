@@ -6,7 +6,7 @@ part of 'quran_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class QuranModelAdapter extends TypeAdapter<Quran> {
+class QuranAdapter extends TypeAdapter<Quran> {
   @override
   final int typeId = 0;
 
@@ -41,7 +41,7 @@ class QuranModelAdapter extends TypeAdapter<Quran> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is QuranModelAdapter &&
+      other is QuranAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

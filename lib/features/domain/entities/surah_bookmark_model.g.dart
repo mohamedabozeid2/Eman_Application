@@ -1,32 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'quran_data_model.dart';
+part of 'surah_bookmark_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class QuranDataAdapter extends TypeAdapter<QuranData> {
+class SurahBookmarkModelAdapter extends TypeAdapter<SurahBookmarkModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 4;
 
   @override
-  QuranData read(BinaryReader reader) {
+  SurahBookmarkModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return QuranData(
-      surahs: (fields[0] as List).cast<Surah>(),
+    return SurahBookmarkModel(
+      scrollPosition: fields[1] as double,
+      surah: fields[0] as Surah,
     );
   }
 
   @override
-  void write(BinaryWriter writer, QuranData obj) {
+  void write(BinaryWriter writer, SurahBookmarkModel obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.surahs);
+      ..write(obj.surah)
+      ..writeByte(1)
+      ..write(obj.scrollPosition);
   }
 
   @override
@@ -35,7 +38,7 @@ class QuranDataAdapter extends TypeAdapter<QuranData> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is QuranDataAdapter &&
+      other is SurahBookmarkModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

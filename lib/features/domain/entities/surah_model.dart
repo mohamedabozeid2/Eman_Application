@@ -15,12 +15,15 @@ class Surah extends HiveObject with EquatableMixin {
   final String englishName;
   @HiveField(3)
   List<Ayah> ayahs = [];
+  @HiveField(4)
+  final String englishNameTranslation;
 
   Surah({
     required this.name,
     required this.ayahs,
     required this.number,
     required this.englishName,
+    required this.englishNameTranslation,
   });
 
   @override
@@ -30,5 +33,6 @@ class Surah extends HiveObject with EquatableMixin {
         ayahs,
         number,
         englishName,
+        englishNameTranslation,
       ];
 }

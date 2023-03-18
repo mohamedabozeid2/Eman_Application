@@ -1,3 +1,4 @@
+import 'package:eman_application/features/domain/entities/surah_bookmark_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../features/domain/entities/ayah_model.dart';
@@ -9,19 +10,23 @@ import 'hive_keys.dart';
 class HiveHelper {
   static Box<QuranData>? surahs;
   static late Box<bool> isQuranDownloaded;
+  static late Box<SurahBookmarkModel> surahLastRead;
 
   static Future<void> init({required String path}) async {
     await Hive.initFlutter(path);
 
     //// Register Adapter
-    Hive.registerAdapter(QuranDataModelAdapter());
-    Hive.registerAdapter(QuranModelAdapter());
-    Hive.registerAdapter(SurahModelAdapter());
-    Hive.registerAdapter(AyahModelAdapter());
+    Hive.registerAdapter(QuranDataAdapter());
+    Hive.registerAdapter(QuranAdapter());
+    Hive.registerAdapter(SurahAdapter());
+    Hive.registerAdapter(AyahAdapter());
+    Hive.registerAdapter(SurahBookmarkModelAdapter());
 
     //// Open Boxes
     surahs = await Hive.openBox<QuranData>(HiveKeys.surahs);
     isQuranDownloaded = await Hive.openBox<bool>(HiveKeys.isQuranDownloaded);
+    surahLastRead =
+        await Hive.openBox<SurahBookmarkModel>(HiveKeys.surahSurahLastRead);
   }
 
   static Future<void> putIsQuranDownloaded({
@@ -52,5 +57,15 @@ class HiveHelper {
     required String key,
   }) {
     return box.get(key);
+  }
+
+  static Future<void> putSurahLastRead({
+    required SurahBookmarkModel model,
+  }) async {
+    return await surahLastRead.put(HiveKeys.surahSurahLastRead, model);
+  }
+
+  static SurahBookmarkModel? getSurahLastRead() {
+    return surahLastRead.get(HiveKeys.surahSurahLastRead);
   }
 }

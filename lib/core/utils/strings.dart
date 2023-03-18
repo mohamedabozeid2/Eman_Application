@@ -10,5 +10,7 @@ class AppStrings {
   static const String learnHowToPray = 'How To Pray';
   static const String qibla = 'Qibla';
   static const String quranDownloaded = "Quran is downloaded successfully";
+  static const String addedToBookmarks = "Added to bookmarks successfully";
   static const String goTo = "Go to";
+  static const String lastRead = "Last Read";
 }

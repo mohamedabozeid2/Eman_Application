@@ -6,7 +6,7 @@ part of 'ayah_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AyahModelAdapter extends TypeAdapter<Ayah> {
+class AyahAdapter extends TypeAdapter<Ayah> {
   @override
   final int typeId = 3;
 
@@ -44,7 +44,7 @@ class AyahModelAdapter extends TypeAdapter<Ayah> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AyahModelAdapter &&
+      other is AyahAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

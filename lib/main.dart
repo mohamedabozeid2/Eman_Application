@@ -41,6 +41,8 @@ void main() async {
     );
   }
 
+  lastRead = HiveHelper.getSurahLastRead();
+
   BlocOverrides.runZoned(
     () {
       runApp(
