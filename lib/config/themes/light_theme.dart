@@ -50,13 +50,14 @@ ThemeData lightTheme = ThemeData(
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.dark,
     ),
-    iconTheme: const IconThemeData(
-      color: Colors.black,
+    iconTheme: IconThemeData(
+      color: Colors.white,
+      size: AppFontSize.s34,
     ),
     actionsIconTheme: const IconThemeData(color: Colors.black),
     titleTextStyle: TextStyle(
-      color: Colors.black,
-      fontSize: AppFontSize.s20,
+      color: Colors.white,
+      fontSize: AppFontSize.s28,
       fontWeight: FontWeightManager.bold,
     ),
     titleSpacing: 20.0,

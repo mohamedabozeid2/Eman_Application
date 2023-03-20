@@ -11,6 +11,7 @@ import '../../../../core/utils/strings.dart';
 import '../../../../core/widgets/adaptive_indicator.dart';
 import '../../controller/main_cubit/main_cubit.dart';
 import '../../controller/main_cubit/main_status.dart';
+import '../bookmarks_screen/bookmarks_screen.dart';
 import '../quran_screen/quran_screen.dart';
 import '../quran_screen/surah_screen.dart';
 import 'model/navigatorTapModel.dart';
@@ -83,23 +84,26 @@ class _MainScreenState extends State<MainScreen> {
                             height: AppSize.s20,
                           ),
                           BlocConsumer<MainCubit, MainStates>(
-                            buildWhen: (previous, current) => current is AddToLastReadSuccessState,
-                            listener: (context, state){},
-                            builder: (context, state){
+                            buildWhen: (previous, current) =>
+                                current is AddToLastReadSuccessState,
+                            listener: (context, state) {},
+                            builder: (context, state) {
                               return lastRead == null
                                   ? Container()
                                   : NavigatorTap(
-                                navigatorTapModel: NavigatorTapModel(
-                                  title: AppStrings.lastRead,
-                                  firstColor: tapsColors[6],
-                                  secondColor: tapsColors[7],
-                                  image: AssetsManager.lantern,
-                                  pathWidget: SurahScreen(
-                                      surah: lastRead!.surah,
-                                      fromLastRead: true),
-                                ),
-                                fromLastRead: true,
-                              );
+                                      navigatorTapModel: NavigatorTapModel(
+                                        title: AppStrings.lastRead,
+                                        firstColor: tapsColors[6],
+                                        secondColor: tapsColors[7],
+                                        image: AssetsManager.lantern,
+                                        pathWidget: SurahScreen(
+                                          surah: lastRead!.surah,
+                                          jumpToPosition:
+                                              lastRead!.scrollPosition,
+                                        ),
+                                      ),
+                                      fromLastRead: true,
+                                    );
                             },
                           ),
                           GridView.count(
@@ -119,14 +123,15 @@ class _MainScreenState extends State<MainScreen> {
                                   pathWidget: QuranScreen(),
                                 ),
                               ),
-                              // NavigatorTap(
-                              //   navigatorTapModel: NavigatorTapModel(
-                              //     title: AppStrings.bookmarks,
-                              //     firstColor: tapsColors[8],
-                              //     secondColor: tapsColors[9],
-                              //     image: AssetsManager.bookmarks,
-                              //   ),
-                              // ),
+                              NavigatorTap(
+                                navigatorTapModel: NavigatorTapModel(
+                                  title: AppStrings.bookmarks,
+                                  firstColor: tapsColors[8],
+                                  secondColor: tapsColors[9],
+                                  image: AssetsManager.bookmarks,
+                                  pathWidget: BookmarksScreen(),
+                                ),
+                              ),
                               // NavigatorTap(
                               //   navigatorTapModel: NavigatorTapModel(
                               //     title: AppStrings.radio,

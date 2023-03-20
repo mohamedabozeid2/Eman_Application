@@ -3,7 +3,6 @@ import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/widgets/divider.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_fonts.dart';
 import '../../../../core/utils/app_values.dart';
 import '../../../../core/utils/helper.dart';
 import '../../../../core/utils/strings.dart';
@@ -22,16 +21,10 @@ class QuranScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
-            iconTheme:
-                IconThemeData(color: Colors.white, size: AppFontSize.s34),
-            title: Text(
-              'My ${AppStrings.appName}',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline3!
-                  .copyWith(color: Colors.white),
-            ),
             toolbarHeight: Helper.maxHeight * 0.15,
+            title: const Text(
+              'My ${AppStrings.appName}',
+            ),
           ),
           SliverToBoxAdapter(
             child: Column(

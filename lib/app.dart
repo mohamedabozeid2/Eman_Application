@@ -29,6 +29,7 @@ class EmanApplication extends StatelessWidget {
               BlocProvider(
                   create: (BuildContext context) => MainCubit(
                         sl(),
+                        sl(),
                       )),
             ],
             child: GetMaterialApp(

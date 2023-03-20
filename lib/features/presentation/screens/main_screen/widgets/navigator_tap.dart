@@ -76,15 +76,28 @@ class NavigatorTap extends StatelessWidget {
                       bottom: AppSize.s10,
                       top: fromLastRead ? AppSize.s10 : AppSize.s30,
                     ),
-                    child: Text(
-                      fromLastRead
-                          ? lastRead!.surah.name
-                          : navigatorTapModel.title,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2!
-                          .copyWith(color: Colors.white),
+                    child: Column(
+                      children: [
+                        Text(
+                          fromLastRead
+                              ? lastRead!.surah.name
+                              : navigatorTapModel.title,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2!
+                              .copyWith(color: Colors.white),
+                        ),
+                        fromLastRead
+                            ? Text(
+                                lastRead!.date,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .caption!
+                                    .copyWith(color: Colors.white),
+                              )
+                            : Container(),
+                      ],
                     ),
                   ),
                   Padding(

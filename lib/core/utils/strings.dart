@@ -13,4 +13,8 @@ class AppStrings {
   static const String addedToBookmarks = "Added to bookmarks successfully";
   static const String goTo = "Go to";
   static const String lastRead = "Last Read";
+  static const String audioIsAlreadyPlaying = "Audio is playing";
+  static const String noThingToPause = "There is nothing is playing";
+  static const String noInternetForAudio =
+      "Audio file is not available please check your internet connection";
 }

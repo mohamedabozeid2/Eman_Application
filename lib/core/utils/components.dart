@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eman_application/core/utils/app_values.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -33,6 +34,7 @@ class Components {
     required Color textColor,
   }) {
     Get.snackbar(title, message,
+        margin: EdgeInsets.symmetric(vertical: AppSize.s30, horizontal: AppSize.s10),
         backgroundColor: backgroundColor,
         colorText: textColor,
         animationDuration: const Duration(
@@ -52,25 +54,25 @@ class Components {
     }));
   }
 
-  // static slideNavigateTo(context, page) {
-  //   Navigator.of(context).push(SlideAnimationNav(page: page, context: context));
-  // }
-  //
-  // static scaleNavigateTo(context, page) {
-  //   Navigator.of(context).push(ScaleAnimationNav(page: page, context: context));
-  // }
-  //
-  // static rotationNavigateTo(context, page) {
-  //   Navigator.of(context)
-  //       .push(RotationAnimationNav(page: page, context: context));
-  // }
-  //
-  // static sizeNavigateTo(context, page) {
-  //   Navigator.of(context).push(SizeAnimationNav(page: page, context: context));
-  // }
-  //
-  // static opacityNavigateTo(context, page) {
-  //   Navigator.of(context)
-  //       .push(OpacityAnimationNav(page: page, context: context));
-  // }
+// static slideNavigateTo(context, page) {
+//   Navigator.of(context).push(SlideAnimationNav(page: page, context: context));
+// }
+//
+// static scaleNavigateTo(context, page) {
+//   Navigator.of(context).push(ScaleAnimationNav(page: page, context: context));
+// }
+//
+// static rotationNavigateTo(context, page) {
+//   Navigator.of(context)
+//       .push(RotationAnimationNav(page: page, context: context));
+// }
+//
+// static sizeNavigateTo(context, page) {
+//   Navigator.of(context).push(SizeAnimationNav(page: page, context: context));
+// }
+//
+// static opacityNavigateTo(context, page) {
+//   Navigator.of(context)
+//       .push(OpacityAnimationNav(page: page, context: context));
+// }
 }

@@ -9,3 +9,4 @@ bool internetConnection = false;
 bool isQuranDownloaded = false;
 QuranData? quranData;
 SurahBookmarkModel? lastRead;
+List bookmarks = <SurahBookmarkModel>[];

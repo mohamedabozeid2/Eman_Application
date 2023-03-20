@@ -28,7 +28,9 @@ dependencies:
   arabic_numbers: ^1.0.0
   flutter_custom_clippers: ^2.1.0
   cached_network_image: ^3.2.1
-
+  intl: ^0.17.0
+  just_audio: ^0.9.31
+  audio_session: ^0.1.13
 
   # hive packages
   hive: ^2.2.3

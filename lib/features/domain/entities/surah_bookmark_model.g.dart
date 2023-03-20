@@ -19,17 +19,20 @@ class SurahBookmarkModelAdapter extends TypeAdapter<SurahBookmarkModel> {
     return SurahBookmarkModel(
       scrollPosition: fields[1] as double,
       surah: fields[0] as Surah,
+      date: fields[2] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, SurahBookmarkModel obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.surah)
       ..writeByte(1)
-      ..write(obj.scrollPosition);
+      ..write(obj.scrollPosition)
+      ..writeByte(2)
+      ..write(obj.date);
   }
 
   @override

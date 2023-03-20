@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
+import 'core/api/audio_dio_helper.dart';
 import 'core/api/radio_dio_helper.dart';
 import 'core/hive/hive_helper.dart';
 import 'core/hive/hive_keys.dart';
@@ -28,7 +29,7 @@ void main() async {
 
   EmanDioHelper.init();
   RadioDioHelper.init();
-
+  AudioDioHelper.init();
   isQuranDownloaded = HiveHelper.getIsQuranDownloaded(
     box: HiveHelper.isQuranDownloaded,
     key: HiveKeys.isQuranDownloaded,
@@ -41,7 +42,10 @@ void main() async {
     );
   }
 
+  print(DateTime.now());
+  // print(HiveHelper.getBookmarksList()!);
   lastRead = HiveHelper.getSurahLastRead();
+  bookmarks = HiveHelper.getBookmarksList()!;
 
   BlocOverrides.runZoned(
     () {

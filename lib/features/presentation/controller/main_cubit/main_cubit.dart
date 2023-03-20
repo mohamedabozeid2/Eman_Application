@@ -11,16 +11,21 @@ import 'package:eman_application/features/domain/entities/quran_model.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
+import '../../../domain/entities/surah_audio.dart';
 import '../../../domain/entities/surah_bookmark_model.dart';
 import '../../../domain/entities/surah_model.dart';
 import '../../../domain/use_cases/get_quran.dart';
+import '../../../domain/use_cases/get_surah_audio.dart';
 
 class MainCubit extends Cubit<MainStates> {
   final GetQuranUseCase getQuranUseCase;
+  final GetSurahAudioUseCase getSurahAudioUseCase;
 
   MainCubit(
     this.getQuranUseCase,
+    this.getSurahAudioUseCase,
   ) : super(MainInitialState());
 
   static MainCubit get(context) => BlocProvider.of(context);
@@ -66,19 +71,85 @@ class MainCubit extends Cubit<MainStates> {
     return await getQuranUseCase.execute();
   }
 
+  String? surahAudioUrl;
+
+  Future<void> getSurahAudio({
+    required int surahIndex,
+  }) async {
+    emit(MainGetSurahAudioLoadingState());
+    CheckConnection.checkConnection().then((value) async {
+      internetConnection = value;
+      if (value) {
+        await callSurahAudio(surahIndex: surahIndex).then((surahAudio) {
+          surahAudio.fold((l) {
+            emit(MainGetSurahAudioErrorState());
+          }, (r) {
+            surahAudioUrl = r.audioUrl;
+            emit(MainGetSurahAudioSuccessState());
+          });
+        });
+      } else {
+        Components.showSnackBar(
+          title: AppStrings.appName,
+          message: AppStrings.noInternetForAudio,
+          backgroundColor: Colors.white,
+          textColor: AppColors.tealColor,
+          durationWithMilliSeconds: 2000,
+        );
+        emit(MainGetSurahAudioErrorState());
+      }
+    });
+  }
+
+  Future<Either<Failure, SurahAudio>> callSurahAudio({
+    required int surahIndex,
+  }) async {
+    return await getSurahAudioUseCase.execute(surahIndex: surahIndex);
+  }
+
   void saveLastRead({
-  required ScrollController scrollController,
+    required ScrollController scrollController,
     required Surah surah,
-}){
+  }) {
     HiveHelper.putSurahLastRead(
       model: SurahBookmarkModel(
-          scrollPosition: scrollController.position.pixels,
-          surah: surah),
+        scrollPosition: scrollController.position.pixels,
+        surah: surah,
+        date: DateFormat.yMMMMd().format(DateTime.now()),
+      ),
     );
     lastRead = SurahBookmarkModel(
       scrollPosition: scrollController.position.pixels,
       surah: surah,
+      date: DateFormat.yMMMMd().format(DateTime.now()),
     );
     emit(AddToLastReadSuccessState());
+  }
+
+  void addToBookmark({
+    required ScrollController scrollController,
+    required Surah surah,
+  }) {
+    bookmarks.add(
+      SurahBookmarkModel(
+          scrollPosition: scrollController.position.pixels,
+          surah: surah,
+          date: DateFormat.yMMMMd().format(DateTime.now())),
+    );
+    HiveHelper.putInBookmarksList(model: bookmarks);
+    emit(AddToBookmarksSuccessState());
+  }
+
+  void removeFromBookmarks({
+    required SurahBookmarkModel bookmarkModel,
+  }) {
+    emit(MainRemoveBookmarkLoadingState());
+    if (bookmarks.contains(bookmarkModel)) {
+      bookmarks.remove(bookmarkModel);
+      HiveHelper.putInBookmarksList(model: bookmarks);
+      emit(MainRemoveBookmarkSuccessState());
+    } else {
+      emit(MainRemoveBookmarkErrorState());
+    }
   }
 }
