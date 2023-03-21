@@ -99,9 +99,6 @@ class _SurahScreenState extends State<SurahScreen> {
         actions: [
           GestureDetector(
             onTap: () {
-              print("TEST");
-              print(internetConnection);
-              print(isSurahAudioPlaying);
               if (isSurahAudioPlaying) {
                 audioPlayer.pause();
                 isSurahAudioPlaying = false;
@@ -135,10 +132,8 @@ class _SurahScreenState extends State<SurahScreen> {
             builder: (context, state) {
               return GestureDetector(
                 onTap: () {
-                  if (!isSurahAudioPlaying) {
-                    if (internetConnection) {
+                  if (!isSurahAudioPlaying && internetConnection) {
                       isSurahAudioPlaying = true;
-                    }
                     MainCubit.get(context)
                         .getSurahAudio(surahIndex: widget.surah.number);
                   } else {

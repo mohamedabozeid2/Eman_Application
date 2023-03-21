@@ -14,5 +14,9 @@ class MainRemoveBookmarkLoadingState extends MainStates{}
 class MainRemoveBookmarkSuccessState extends MainStates{}
 class MainRemoveBookmarkErrorState extends MainStates{}
 
+class MainGetRadioLoadingState extends MainStates{}
+class MainGetRadioSuccessState extends MainStates{}
+class MainGetRadioErrorState extends MainStates{}
+
 class AddToLastReadSuccessState extends MainStates{}
 class AddToBookmarksSuccessState extends MainStates{}

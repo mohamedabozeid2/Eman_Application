@@ -13,19 +13,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../domain/entities/radio.dart';
 import '../../../domain/entities/surah_audio.dart';
 import '../../../domain/entities/surah_bookmark_model.dart';
 import '../../../domain/entities/surah_model.dart';
 import '../../../domain/use_cases/get_quran.dart';
+import '../../../domain/use_cases/get_radio.dart';
 import '../../../domain/use_cases/get_surah_audio.dart';
 
 class MainCubit extends Cubit<MainStates> {
   final GetQuranUseCase getQuranUseCase;
   final GetSurahAudioUseCase getSurahAudioUseCase;
+  final GetRadioUseCase getRadioUseCase;
 
   MainCubit(
     this.getQuranUseCase,
     this.getSurahAudioUseCase,
+    this.getRadioUseCase,
   ) : super(MainInitialState());
 
   static MainCubit get(context) => BlocProvider.of(context);
@@ -105,6 +109,34 @@ class MainCubit extends Cubit<MainStates> {
     required int surahIndex,
   }) async {
     return await getSurahAudioUseCase.execute(surahIndex: surahIndex);
+  }
+
+  Future<void> getRadio() async {
+    emit(MainGetRadioLoadingState());
+    CheckConnection.checkConnection().then((value) {
+      internetConnection = value;
+      if (value) {
+        callRadio().then((value) {
+          value.fold((l) {
+            emit(MainGetRadioErrorState());
+          }, (r) {
+            radioModel = r;
+            emit(MainGetRadioSuccessState());
+          });
+        });
+      }/* else {
+        Components.showSnackBar(
+          title: AppStrings.appName,
+          message: AppStrings.checkInternet,
+          backgroundColor: Colors.white,
+          textColor: AppColors.tealColor,
+        );
+      }*/
+    });
+  }
+
+  Future<Either<Failure, RadioEntity>> callRadio() async {
+    return await getRadioUseCase.execute();
   }
 
   void saveLastRead({

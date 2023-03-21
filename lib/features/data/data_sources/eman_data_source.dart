@@ -1,10 +1,12 @@
 import 'package:eman_application/core/api/audio_dio_helper.dart';
 import 'package:eman_application/core/api/eman_dio_helper.dart';
 import 'package:eman_application/core/api/end_points.dart';
+import 'package:eman_application/core/api/radio_dio_helper.dart';
 import 'package:eman_application/core/error/exception.dart';
 import 'package:eman_application/core/network/eman_error_message_model.dart';
 import 'package:eman_application/features/data/models/quran_model.dart';
 
+import '../models/radio_model.dart';
 import '../models/surah_audio_model.dart';
 
 abstract class BaseEmanRemoteDataSource {
@@ -13,6 +15,8 @@ abstract class BaseEmanRemoteDataSource {
   Future<SurahAudioModel> getSurahAudio({
     required int surahIndex,
   });
+
+  Future<RadioModel> getRadio();
 }
 
 class EmanRemoteDataSource extends BaseEmanRemoteDataSource {
@@ -39,6 +43,21 @@ class EmanRemoteDataSource extends BaseEmanRemoteDataSource {
     if (response.statusCode == 200) {
       return SurahAudioModel.fromJson(
           response.data['audio_files'][surahIndex - 1]);
+    } else {
+      throw EmanServerException(
+        emanErrorMessageModel: EmanErrorMessageModel.fromJson(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<RadioModel> getRadio() async {
+    final response =
+        await RadioDioHelper.getData(url: EndPoints.radios, query: {
+      "language": "eng",
+    });
+    if (response.statusCode == 200) {
+      return RadioModel.fromJson(response.data['radios'][0]);
     } else {
       throw EmanServerException(
         emanErrorMessageModel: EmanErrorMessageModel.fromJson(response.data),

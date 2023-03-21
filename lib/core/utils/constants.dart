@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:eman_application/features/domain/entities/radio.dart';
 import 'package:eman_application/features/domain/entities/surah_bookmark_model.dart';
 
 import '../../features/domain/entities/quran_data_model.dart';
@@ -10,3 +11,4 @@ bool isQuranDownloaded = false;
 QuranData? quranData;
 SurahBookmarkModel? lastRead;
 List bookmarks = <SurahBookmarkModel>[];
+RadioEntity? radioModel;

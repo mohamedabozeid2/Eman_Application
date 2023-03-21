@@ -14,6 +14,7 @@ import '../../controller/main_cubit/main_status.dart';
 import '../bookmarks_screen/bookmarks_screen.dart';
 import '../quran_screen/quran_screen.dart';
 import '../quran_screen/surah_screen.dart';
+import '../radio_screen/radio_screen.dart';
 import 'model/navigatorTapModel.dart';
 import 'widgets/navigator_tap.dart';
 
@@ -108,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                           GridView.count(
                             crossAxisCount: 2,
-                            childAspectRatio: 1 / 1.2,
+                            childAspectRatio: 1 / 1.3,
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             crossAxisSpacing: AppSize.s20,
@@ -132,14 +133,15 @@ class _MainScreenState extends State<MainScreen> {
                                   pathWidget: BookmarksScreen(),
                                 ),
                               ),
-                              // NavigatorTap(
-                              //   navigatorTapModel: NavigatorTapModel(
-                              //     title: AppStrings.radio,
-                              //     firstColor: tapsColors[0],
-                              //     secondColor: tapsColors[1],
-                              //     image: AssetsManager.radio,
-                              //   ),
-                              // ),
+                              NavigatorTap(
+                                navigatorTapModel: NavigatorTapModel(
+                                  title: AppStrings.radio,
+                                  firstColor: tapsColors[0],
+                                  secondColor: tapsColors[1],
+                                  image: AssetsManager.radio,
+                                  pathWidget: const RadioScreen(),
+                                ),
+                              ),
                               // NavigatorTap(
                               //   navigatorTapModel: NavigatorTapModel(
                               //     title: AppStrings.qibla,

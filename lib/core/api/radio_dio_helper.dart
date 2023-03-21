@@ -26,19 +26,5 @@ class RadioDioHelper{
     return await dio!.get(url,queryParameters: query);
   }
 
-  static Future<Response> postData({
-    required String url,
-    required Map<String,dynamic> data,
-    Map<String,dynamic>? query,
-    String? contentType = 'application/json',
-    String? lang='en-US',
-  })async{
-    dio!.options.headers={
-      'Content-Type':contentType,
-      'lang':lang,
-    };
-
-    return await dio!.post(url,data: data,queryParameters: query);
-  }
 
 }

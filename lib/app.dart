@@ -30,7 +30,8 @@ class EmanApplication extends StatelessWidget {
                   create: (BuildContext context) => MainCubit(
                         sl(),
                         sl(),
-                      )),
+                        sl(),
+                      )..getRadio()),
             ],
             child: GetMaterialApp(
               useInheritedMediaQuery: true,

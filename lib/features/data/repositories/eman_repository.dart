@@ -3,6 +3,7 @@ import 'package:eman_application/core/error/exception.dart';
 import 'package:eman_application/core/error/failure.dart';
 import 'package:eman_application/features/data/data_sources/eman_data_source.dart';
 import 'package:eman_application/features/domain/entities/quran_model.dart';
+import 'package:eman_application/features/domain/entities/radio.dart';
 import 'package:eman_application/features/domain/entities/surah_audio.dart';
 import 'package:eman_application/features/domain/repositories/base_eman_repository.dart';
 
@@ -29,6 +30,20 @@ class EmanRepository extends BaseEmanRepository {
     try {
       final result =
           await baseEmanRemoteDataSource.getSurahAudio(surahIndex: surahIndex);
+      return Right(result);
+    } on EmanServerException catch (failure) {
+      return Left(
+        ServerFailure(
+          failure.emanErrorMessageModel.statusMessage,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, RadioEntity>> getRadio() async {
+    try {
+      final result = await baseEmanRemoteDataSource.getRadio();
       return Right(result);
     } on EmanServerException catch (failure) {
       return Left(
