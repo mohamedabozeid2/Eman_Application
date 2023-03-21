@@ -4,6 +4,7 @@ import 'package:eman_application/core/utils/colors.dart';
 import 'package:eman_application/core/utils/components.dart';
 import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/utils/helper.dart';
+import 'package:eman_application/features/presentation/screens/qibla_screen/qibla_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -142,14 +143,15 @@ class _MainScreenState extends State<MainScreen> {
                                   pathWidget: const RadioScreen(),
                                 ),
                               ),
-                              // NavigatorTap(
-                              //   navigatorTapModel: NavigatorTapModel(
-                              //     title: AppStrings.qibla,
-                              //     firstColor: tapsColors[6],
-                              //     secondColor: tapsColors[7],
-                              //     image: AssetsManager.kaaba,
-                              //   ),
-                              // ),
+                              NavigatorTap(
+                                navigatorTapModel: NavigatorTapModel(
+                                  title: AppStrings.qibla,
+                                  firstColor: tapsColors[6],
+                                  secondColor: tapsColors[7],
+                                  image: AssetsManager.kaaba,
+                                  pathWidget: Qibla(),
+                                ),
+                              ),
                               // NavigatorTap(
                               //   navigatorTapModel: NavigatorTapModel(
                               //     title: AppStrings.hadith,

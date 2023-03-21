@@ -13,4 +13,7 @@ class AssetsManager {
   static const String hadith = "$imagePath/hadith.png";
   static const String send = "$imagePath/send.png";
   static const String lantern = "$imagePath/lantern.png";
+  static const String qiblaCompass = "$imagePath/qiblaCompass.jpg";
+  static const String compass = "$imagePath/compass.svg";
+  static const String needle = "$imagePath/needle.svg";
 }

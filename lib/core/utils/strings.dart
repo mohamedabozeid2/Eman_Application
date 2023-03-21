@@ -10,6 +10,7 @@ class AppStrings {
   static const String sealOfTheQuran = 'Seal Quran';
   static const String learnHowToPray = 'How To Pray';
   static const String qibla = 'Qibla';
+  static const String retry = 'Retry';
   static const String quranDownloaded = "Quran is downloaded successfully";
   static const String addedToBookmarks = "Added to bookmarks successfully";
   static const String goTo = "Go to";
@@ -17,6 +18,7 @@ class AppStrings {
   static const String audioIsAlreadyPlaying = "Audio is playing";
   static const String radioIsAlreadyPlaying = "Radio is playing";
   static const String noThingToPause = "There is nothing is playing";
+  static const String yourDeviceIsNotSupported = "Your device is not supported";
   static const String noInternetForAudio =
       "Audio file is not available please check your internet connection";
   static const String checkInternet =
