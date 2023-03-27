@@ -6,37 +6,37 @@ import '../../core/utils/colors.dart';
 
 ThemeData lightTheme = ThemeData(
   textTheme: TextTheme(
-    headline6: TextStyle(
+    titleLarge: TextStyle(
       fontSize: AppFontSize.s28,
       color: Colors.black,
       fontWeight: FontWeightManager.bold,
     ),
-    headline5: TextStyle(
+    headlineSmall: TextStyle(
       fontSize: AppFontSize.s34,
       color: Colors.black,
       fontWeight: FontWeightManager.bold,
     ),
-    headline3: TextStyle(
+    displaySmall: TextStyle(
       fontSize: AppFontSize.s38,
       color: Colors.black,
       fontWeight: FontWeightManager.bold,
     ),
-    bodyText1: TextStyle(
+    bodyLarge: TextStyle(
       fontSize: AppFontSize.s22,
       color: Colors.black,
       fontWeight: FontWeightManager.semiBold,
     ),
-    bodyText2: TextStyle(
+    bodyMedium: TextStyle(
       fontSize: AppFontSize.s20,
       color: Colors.black,
       fontWeight: FontWeightManager.semiBold,
     ),
-    subtitle1: TextStyle(
+    titleMedium: TextStyle(
       fontSize: AppFontSize.s18,
       color: Colors.black,
       fontWeight: FontWeightManager.regular,
     ),
-    subtitle2: TextStyle(
+    titleSmall: TextStyle(
       fontSize: AppFontSize.s14,
       color: Colors.black,
       fontWeight: FontWeightManager.regular,
@@ -63,5 +63,5 @@ ThemeData lightTheme = ThemeData(
     titleSpacing: 20.0,
     centerTitle: true,
   ),
-  scaffoldBackgroundColor: AppColors.tealColor,
+  scaffoldBackgroundColor: AppColors.backgroundColor,
 );

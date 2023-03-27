@@ -2,10 +2,11 @@ import '../../domain/entities/quran_model.dart';
 import 'quran_data_model.dart';
 
 class QuranModel extends Quran {
-  QuranModel(
-      {required super.quranDataModel,
-      required super.statusMessage,
-      required super.statusCode});
+  QuranModel({
+    required super.quranDataModel,
+    required super.statusMessage,
+    required super.statusCode,
+  });
 
   factory QuranModel.fromJson(Map<String, dynamic> json) {
     return QuranModel(

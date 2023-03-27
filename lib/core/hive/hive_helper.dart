@@ -1,3 +1,5 @@
+import 'package:eman_application/features/data/models/single_azkar_model.dart';
+import 'package:eman_application/features/domain/entities/azkar.dart';
 import 'package:eman_application/features/domain/entities/surah_bookmark_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -12,6 +14,8 @@ class HiveHelper {
   static late Box<bool> isQuranDownloaded;
   static late Box<SurahBookmarkModel> surahLastRead;
   static late Box<List> bookmarksList;
+  static late Box<AzkarEntity> azkar;
+  static late Box<bool> isAzkarDownloaded;
 
   static Future<void> init({required String path}) async {
     await Hive.initFlutter(path);
@@ -21,21 +25,23 @@ class HiveHelper {
     Hive.registerAdapter(SurahAdapter());
     Hive.registerAdapter(AyahAdapter());
     Hive.registerAdapter(SurahBookmarkModelAdapter());
+    Hive.registerAdapter(AzkarEntityAdapter());
+    Hive.registerAdapter(SingleAzkarAdapter());
     //// Open Boxes
     surahs = await Hive.openBox<QuranData>(HiveKeys.surahs);
     isQuranDownloaded = await Hive.openBox<bool>(HiveKeys.isQuranDownloaded);
     surahLastRead =
         await Hive.openBox<SurahBookmarkModel>(HiveKeys.surahSurahLastRead);
-    bookmarksList =
-        await Hive.openBox<List>(HiveKeys.bookmarksList);
+    bookmarksList = await Hive.openBox<List>(HiveKeys.bookmarksList);
+    azkar = await Hive.openBox<AzkarEntity>(HiveKeys.azkar);
+    isAzkarDownloaded = await Hive.openBox<bool>(HiveKeys.isAzkarDownloaded);
   }
 
   static Future<void> putIsQuranDownloaded({
-    required Box box,
-    required String key,
-    required bool isQuranDownloaded,
+    required bool isQuranDownloadedValue,
   }) async {
-    return await box.put(key, isQuranDownloaded);
+    return await isQuranDownloaded.put(
+        HiveKeys.isQuranDownloaded, isQuranDownloadedValue);
   }
 
   static bool getIsQuranDownloaded({
@@ -46,18 +52,13 @@ class HiveHelper {
   }
 
   static Future<void> putQuran({
-    required Box box,
-    required String key,
     required QuranData quran,
   }) async {
-    return await box.put(key, quran);
+    return await surahs!.put(HiveKeys.surahs, quran);
   }
 
-  static QuranData getQuran({
-    required Box box,
-    required String key,
-  }) {
-    return box.get(key);
+  static QuranData getQuran() {
+    return surahs!.get(HiveKeys.surahs)!;
   }
 
   static Future<void> putSurahLastRead({
@@ -68,6 +69,29 @@ class HiveHelper {
 
   static SurahBookmarkModel? getSurahLastRead() {
     return surahLastRead.get(HiveKeys.surahSurahLastRead);
+  }
+
+  static Future<void> putInAzkar({
+    required AzkarEntity model,
+  }) async {
+    return await azkar.put(HiveKeys.azkar, model);
+  }
+
+  static AzkarEntity? getAzkarData() {
+    return azkar.get(HiveKeys.azkar);
+  }
+
+  static Future<void> putIsAzkarDownloaded({
+    required bool isAzkarDownloadedValue,
+  }) async {
+    return await isAzkarDownloaded.put(
+        HiveKeys.isAzkarDownloaded, isAzkarDownloadedValue);
+  }
+
+  static bool getIsAzkarDownloaded({
+    required String key,
+  }) {
+    return isAzkarDownloaded.get(key, defaultValue: false)!;
   }
 
   static Future<void> putInBookmarksList({
@@ -82,5 +106,4 @@ class HiveHelper {
       defaultValue: <SurahBookmarkModel>[],
     );
   }
-
 }

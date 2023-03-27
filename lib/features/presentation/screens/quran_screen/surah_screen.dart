@@ -92,7 +92,7 @@ class _SurahScreenState extends State<SurahScreen> {
           widget.surah.name,
           style: Theme.of(context)
               .textTheme
-              .headline3!
+              .displaySmall!
               .copyWith(color: Colors.white),
         ),
         iconTheme: IconThemeData(color: Colors.white, size: AppFontSize.s34),
@@ -179,7 +179,7 @@ class _SurahScreenState extends State<SurahScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText1!
+                        .bodyLarge!
                         .copyWith(color: Colors.white),
                   ),
                 ],

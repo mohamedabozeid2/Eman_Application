@@ -34,12 +34,12 @@ class NavigatorTap extends StatelessWidget {
           padding: EdgeInsets.all(AppSize.s15),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topRight,
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
               stops: const [
                 0.2,
                 0.7,
               ],
-              end: Alignment.bottomLeft,
               colors: [
                 navigatorTapModel.firstColor,
                 navigatorTapModel.secondColor,
@@ -60,7 +60,7 @@ class NavigatorTap extends StatelessWidget {
                             navigatorTapModel.title,
                             style: Theme.of(context)
                                 .textTheme
-                                .subtitle1!
+                                .titleMedium!
                                 .copyWith(color: Colors.white),
                           ),
                         )
@@ -85,7 +85,7 @@ class NavigatorTap extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: Theme.of(context)
                               .textTheme
-                              .bodyText2!
+                              .bodyMedium!
                               .copyWith(color: Colors.white),
                         ),
                         fromLastRead
@@ -93,7 +93,7 @@ class NavigatorTap extends StatelessWidget {
                                 lastRead!.date,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .caption!
+                                    .bodySmall!
                                     .copyWith(color: Colors.white),
                               )
                             : Container(),
@@ -106,9 +106,10 @@ class NavigatorTap extends StatelessWidget {
                       children: [
                         Text(
                           AppStrings.goTo,
-                          style: Theme.of(context).textTheme.caption!.copyWith(
-                                color: Colors.white,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: Colors.white,
+                                  ),
                         ),
                         SizedBox(
                           width: AppSize.s5,

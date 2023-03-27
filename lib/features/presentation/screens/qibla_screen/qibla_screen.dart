@@ -20,6 +20,7 @@ class _QiblaState extends State<Qibla> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: AppColors.navy.withOpacity(0.9),
       appBar: AppBar(
         toolbarHeight: Helper.maxHeight * 0.15,
         title: const Text(AppStrings.qibla),

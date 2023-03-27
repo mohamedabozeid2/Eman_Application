@@ -22,7 +22,6 @@ class Ayah extends HiveObject with EquatableMixin {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         number,
         page,

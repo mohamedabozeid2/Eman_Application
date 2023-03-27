@@ -13,7 +13,6 @@ class QuranData extends HiveObject with EquatableMixin {
   QuranData({required this.surahs});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         surahs,
       ];

@@ -1,22 +1,24 @@
 import 'package:dartz/dartz.dart';
 import 'package:eman_application/core/error/failure.dart';
 import 'package:eman_application/core/hive/hive_helper.dart';
-import 'package:eman_application/core/hive/hive_keys.dart';
 import 'package:eman_application/core/network/check_connection.dart';
 import 'package:eman_application/core/utils/colors.dart';
 import 'package:eman_application/core/utils/components.dart';
 import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/utils/strings.dart';
+import 'package:eman_application/features/domain/entities/azkar.dart';
 import 'package:eman_application/features/domain/entities/quran_model.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../core/utils/app_fonts.dart';
 import '../../../domain/entities/radio.dart';
 import '../../../domain/entities/surah_audio.dart';
 import '../../../domain/entities/surah_bookmark_model.dart';
 import '../../../domain/entities/surah_model.dart';
+import '../../../domain/use_cases/get_azkar.dart';
 import '../../../domain/use_cases/get_quran.dart';
 import '../../../domain/use_cases/get_radio.dart';
 import '../../../domain/use_cases/get_surah_audio.dart';
@@ -25,50 +27,66 @@ class MainCubit extends Cubit<MainStates> {
   final GetQuranUseCase getQuranUseCase;
   final GetSurahAudioUseCase getSurahAudioUseCase;
   final GetRadioUseCase getRadioUseCase;
+  final GetAzkarUseCase getAzkarUseCase;
 
   MainCubit(
     this.getQuranUseCase,
     this.getSurahAudioUseCase,
     this.getRadioUseCase,
+    this.getAzkarUseCase,
   ) : super(MainInitialState());
 
   static MainCubit get(context) => BlocProvider.of(context);
 
-  void getQuran() {
-    emit(MainGetQuranLoadingState());
-    CheckConnection.checkConnection().then((value) {
-      internetConnection = value;
-      if (value) {
-        Future.wait([
-          callQuran().then((quranValue) {
+  Future<void> getAllData({
+    required BuildContext context,
+  }) async {
+    emit(MainGetAllDataLoadingState());
+    await Future.wait([
+      getQuran(context: context).then((value) {
+        emit(MainGetAllDataSuccessState());
+      }),
+      getRadio(),
+    ]).then((value) {}).catchError((error) {
+      emit(MainGetAllDataErrorState(error));
+    });
+  }
+
+  Future<void> getQuran({
+    required BuildContext context,
+  }) async {
+    if (!isQuranDownloaded) {
+      emit(MainGetQuranLoadingState());
+      CheckConnection.checkConnection().then((value) async {
+        internetConnection = value;
+        if (value) {
+          await callQuran().then((quranValue) {
             quranValue.fold((l) {
               emit(MainGetQuranErrorState());
             }, (r) {
               quranData = r.quranDataModel;
             });
-          })
-        ]).then((value) {
-          HiveHelper.putQuran(
-            box: HiveHelper.surahs!,
-            key: HiveKeys.surahs,
-            quran: quranData!,
-          );
-          HiveHelper.putIsQuranDownloaded(
-            box: HiveHelper.isQuranDownloaded,
-            key: HiveKeys.isQuranDownloaded,
-            isQuranDownloaded: true,
-          );
-          isQuranDownloaded = true;
-          Components.showSnackBar(
-            title: AppStrings.appName,
-            message: AppStrings.quranDownloaded,
-            backgroundColor: AppColors.mainColor,
-            textColor: Colors.white,
-          );
-          emit(MainGetQuranSuccessState());
-        });
-      }
-    });
+          }).then((value) {
+            HiveHelper.putQuran(
+              quran: quranData!,
+            );
+            HiveHelper.putIsQuranDownloaded(
+              isQuranDownloadedValue: true,
+            );
+            isQuranDownloaded = true;
+
+            getAzkar();
+            Components.showSnackBar(
+              title: AppStrings.appName,
+              message: AppStrings.quranDownloaded,
+              backgroundColor: AppColors.mainColor,
+              textColor: Colors.white,
+            );
+            emit(MainGetQuranSuccessState());
+          });
+        }
+      });
+    }
   }
 
   Future<Either<Failure, Quran>> callQuran() async {
@@ -111,20 +129,56 @@ class MainCubit extends Cubit<MainStates> {
     return await getSurahAudioUseCase.execute(surahIndex: surahIndex);
   }
 
+  Future<void> getAzkar({
+    bool fromAzkarScreen = false,
+  }) async {
+    // print(isAzkarDownloaded);
+    if(fromAzkarScreen){
+      emit(MainGetAzkarLoadingState());
+    }
+    if (!isAzkarDownloaded) {
+      CheckConnection.checkConnection().then((value) async {
+        internetConnection = value;
+        if (value) {
+          await callAzkar().then((azkarValue) {
+            azkarValue.fold((l) {
+              emit(MainGetAzkarErrorState());
+            }, (r) {
+              azkar = r;
+            });
+          }).then((value) {
+            HiveHelper.putInAzkar(model: azkar!);
+            HiveHelper.putIsAzkarDownloaded(isAzkarDownloadedValue: true);
+            isAzkarDownloaded = true;
+            if(fromAzkarScreen){
+              emit(MainGetAzkarSuccessState());
+            }
+          });
+        }
+      });
+    }
+  }
+
+  Future<Either<Failure, AzkarEntity>> callAzkar() async {
+    return await getAzkarUseCase.execute();
+  }
+
   Future<void> getRadio() async {
-    emit(MainGetRadioLoadingState());
-    CheckConnection.checkConnection().then((value) {
+    // emit(MainGetRadioLoadingState());
+    CheckConnection.checkConnection().then((value) async {
       internetConnection = value;
       if (value) {
-        callRadio().then((value) {
+        await callRadio().then((value) {
           value.fold((l) {
             emit(MainGetRadioErrorState());
           }, (r) {
             radioModel = r;
-            emit(MainGetRadioSuccessState());
+            // emit(MainGetRadioSuccessState());
           });
+        }).catchError((error) {
+          emit(MainGetRadioErrorState());
         });
-      }/* else {
+      } /* else {
         Components.showSnackBar(
           title: AppStrings.appName,
           message: AppStrings.checkInternet,
@@ -169,6 +223,12 @@ class MainCubit extends Cubit<MainStates> {
           date: DateFormat.yMMMMd().format(DateTime.now())),
     );
     HiveHelper.putInBookmarksList(model: bookmarks);
+    Components.showToast(
+      msg: AppStrings.addedToBookmarks,
+      fontSize: AppFontSize.s15,
+      textColor: AppColors.tealColor,
+      color: Colors.white,
+    );
     emit(AddToBookmarksSuccessState());
   }
 
@@ -183,5 +243,12 @@ class MainCubit extends Cubit<MainStates> {
     } else {
       emit(MainRemoveBookmarkErrorState());
     }
+  }
+
+  void clearBookmarks() {
+    emit(MainRemoveBookmarkLoadingState());
+    bookmarks.clear();
+    HiveHelper.putInBookmarksList(model: bookmarks);
+    emit(MainRemoveBookmarkSuccessState());
   }
 }

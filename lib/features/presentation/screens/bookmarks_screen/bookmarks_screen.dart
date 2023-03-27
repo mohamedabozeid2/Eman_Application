@@ -1,10 +1,14 @@
+import 'package:eman_application/core/utils/app_fonts.dart';
+import 'package:eman_application/core/utils/assets_manager.dart';
 import 'package:eman_application/core/utils/constants.dart';
+import 'package:eman_application/core/utils/strings.dart';
 import 'package:eman_application/core/widgets/divider.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
 import 'package:eman_application/features/presentation/screens/bookmarks_screen/widgets/bookmarks_item_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/utils/helper.dart';
 
@@ -15,8 +19,25 @@ class BookmarksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bookmarks"),
+        title: const Text(AppStrings.bookmarks),
         toolbarHeight: Helper.maxHeight * 0.15,
+        actions: [
+          PopupMenuButton(
+            color: Colors.white,
+            iconSize: AppFontSize.s30,
+            position: PopupMenuPosition.under,
+            onSelected: (value){
+              if(value == 0){
+                MainCubit.get(context).clearBookmarks();
+              }
+            },
+            itemBuilder: (context) {
+              return [
+                const PopupMenuItem(value: 0, child: Text(AppStrings.deleteAll))
+              ];
+            },
+          ),
+        ],
       ),
       body: BlocConsumer<MainCubit, MainStates>(
         buildWhen: (previous, current) =>
@@ -25,26 +46,41 @@ class BookmarksScreen extends StatelessWidget {
             current is MainRemoveBookmarkLoadingState,
         listener: (context, state) {},
         builder: (context, state) {
-          return Column(
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return BookmarksItemBuilder(
-                      bookmark: bookmarks[index],
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return MyDivider(
-                      color: Colors.white,
-                    );
-                  },
-                  itemCount: bookmarks.length,
-                ),
-              ),
-            ],
-          );
+          return bookmarks.isEmpty
+              ? SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Lottie.asset(AssetsManager.empty),
+                      Text(
+                        AppStrings.emptyBookmarks,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: Colors.white),
+                      )
+                    ],
+                  ),
+                )
+              : Column(
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return BookmarksItemBuilder(
+                            bookmark: bookmarks[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return MyDivider(
+                            color: Colors.white,
+                          );
+                        },
+                        itemCount: bookmarks.length,
+                      ),
+                    ),
+                  ],
+                );
         },
       ),
     );

@@ -39,8 +39,8 @@ class SurahItemBuilder extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s10),
             gradient: LinearGradient(colors: [
-              AppColors.blue,
               AppColors.tealColor,
+              AppColors.navy,
             ], begin: Alignment.centerRight, end: Alignment.centerLeft),
           ),
           child: Row(
@@ -55,7 +55,7 @@ class SurahItemBuilder extends StatelessWidget {
                     child: Center(
                       child: Text(
                         surah.number.toString(),
-                        style: Theme.of(context).textTheme.bodyText2,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                     ),
                   ),
@@ -71,7 +71,7 @@ class SurahItemBuilder extends StatelessWidget {
                     surah.englishName,
                     style: Theme.of(context)
                         .textTheme
-                        .bodyText2!
+                        .bodyMedium!
                         .copyWith(color: Colors.white),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -79,7 +79,7 @@ class SurahItemBuilder extends StatelessWidget {
                     surah.englishNameTranslation,
                     style: Theme.of(context)
                         .textTheme
-                        .caption!
+                        .bodySmall!
                         .copyWith(color: Colors.white),
                     overflow: TextOverflow.ellipsis,
                   )
@@ -90,7 +90,7 @@ class SurahItemBuilder extends StatelessWidget {
                 surah.name,
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2!
+                    .bodyMedium!
                     .copyWith(color: Colors.white),
                 overflow: TextOverflow.ellipsis,
               ),

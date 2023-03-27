@@ -37,7 +37,7 @@ class BookmarksItemBuilder extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSize.s10),
             gradient: LinearGradient(colors: [
               AppColors.mainColor,
-              AppColors.secondaryColor,
+              AppColors.navy,
             ], begin: Alignment.centerRight, end: Alignment.centerLeft),
           ),
           child: Padding(
@@ -51,12 +51,12 @@ class BookmarksItemBuilder extends StatelessWidget {
                       bookmark.surah.name,
                       style: Theme.of(context)
                           .textTheme
-                          .bodyText2!
+                          .bodyMedium!
                           .copyWith(color: Colors.white),
                     ),
                     Text(
                       bookmark.date,
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: Colors.white,
                           ),
                     ),
@@ -82,7 +82,7 @@ class BookmarksItemBuilder extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.all(AppSize.s10),
                               decoration: BoxDecoration(
-                                color: AppColors.redErrorColor,
+                                color: AppColors.navy,
                                 borderRadius:
                                     BorderRadius.circular(AppSize.s10),
                               ),
@@ -90,7 +90,7 @@ class BookmarksItemBuilder extends StatelessWidget {
                                 'Delete',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
+                                    .titleSmall!
                                     .copyWith(color: Colors.white),
                               ),
                             ),

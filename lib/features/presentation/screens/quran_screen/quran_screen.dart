@@ -17,15 +17,15 @@ class QuranScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: Helper.maxHeight * 0.15,
+        title: const Text(
+          'My ${AppStrings.appName}',
+        ),
+      ),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          SliverAppBar(
-            toolbarHeight: Helper.maxHeight * 0.15,
-            title: const Text(
-              'My ${AppStrings.appName}',
-            ),
-          ),
           SliverToBoxAdapter(
             child: Column(
               children: [

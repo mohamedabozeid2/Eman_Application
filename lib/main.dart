@@ -1,11 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:eman_application/core/api/eman_dio_helper.dart';
+import 'package:eman_application/features/presentation/screens/no_internet_screen/no_internet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'app.dart';
 import 'core/api/audio_dio_helper.dart';
+import 'core/api/azkar_dio_helper.dart';
 import 'core/api/radio_dio_helper.dart';
 import 'core/hive/hive_helper.dart';
 import 'core/hive/hive_keys.dart';
@@ -19,7 +21,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   directory = await getApplicationDocumentsDirectory();
 
-  Widget? startWidget = const Layout();
   ServicesLocator().init();
   await HiveHelper.init(path: directory!.path);
 
@@ -30,27 +31,38 @@ void main() async {
   EmanDioHelper.init();
   RadioDioHelper.init();
   AudioDioHelper.init();
+  AzkarDioHelper.init();
   isQuranDownloaded = HiveHelper.getIsQuranDownloaded(
     box: HiveHelper.isQuranDownloaded,
     key: HiveKeys.isQuranDownloaded,
   );
 
   if (isQuranDownloaded) {
-    quranData = HiveHelper.getQuran(
-      box: HiveHelper.surahs!,
-      key: HiveKeys.surahs,
-    );
+    quranData = HiveHelper.getQuran();
   }
 
-  print(DateTime.now());
+  isAzkarDownloaded =
+      HiveHelper.getIsAzkarDownloaded(key: HiveKeys.isAzkarDownloaded);
+  if (isAzkarDownloaded) {
+    azkar = HiveHelper.getAzkarData();
+  }
+
   // print(HiveHelper.getBookmarksList()!);
   lastRead = HiveHelper.getSurahLastRead();
   bookmarks = HiveHelper.getBookmarksList()!;
+  late Widget startWidget;
+
+  if (!isQuranDownloaded && !internetConnection) {
+    startWidget = const NoInternetScreen();
+  } else {
+    startWidget = const Layout();
+  }
 
   BlocOverrides.runZoned(
     () {
       runApp(
         DevicePreview(
+          enabled: false,
           builder: (context) => EmanApplication(
             startWidget: startWidget,
           ),

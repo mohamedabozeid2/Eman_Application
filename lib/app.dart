@@ -31,7 +31,8 @@ class EmanApplication extends StatelessWidget {
                         sl(),
                         sl(),
                         sl(),
-                      )..getRadio()),
+                        sl(),
+                      )),
             ],
             child: GetMaterialApp(
               useInheritedMediaQuery: true,

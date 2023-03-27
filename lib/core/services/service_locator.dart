@@ -1,5 +1,6 @@
 import 'package:eman_application/features/data/data_sources/eman_data_source.dart';
 import 'package:eman_application/features/domain/repositories/base_eman_repository.dart';
+import 'package:eman_application/features/domain/use_cases/get_azkar.dart';
 import 'package:eman_application/features/domain/use_cases/get_quran.dart';
 import 'package:eman_application/features/domain/use_cases/get_radio.dart';
 import 'package:eman_application/features/domain/use_cases/get_surah_audio.dart';
@@ -17,12 +18,13 @@ class ServicesLocator {
           sl(),
           sl(),
           sl(),
+          sl(),
         ));
     // Use Cases
     sl.registerLazySingleton(() => GetQuranUseCase(sl()));
     sl.registerLazySingleton(() => GetSurahAudioUseCase(sl()));
     sl.registerLazySingleton(() => GetRadioUseCase(sl()));
-
+    sl.registerLazySingleton(() => GetAzkarUseCase(sl()));
     // Repositories
     sl.registerLazySingleton<BaseEmanRepository>(() => EmanRepository(sl()));
 
