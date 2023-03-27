@@ -6,6 +6,10 @@ It is an Islamic application where you can read Quran and Azkar every day, save 
 
 #
 
+![Screenshot_2023-03-28-01-26-50-360_com example eman_application](https://user-images.githubusercontent.com/52718382/228089694-47138902-a72b-44cb-9bbe-6cf9557ba1a4.jpg)
+
+#
+
 ![Screenshot_2023-03-28-01-25-57-084_com example eman_application](https://user-images.githubusercontent.com/52718382/228089423-ff5b8767-1f56-46b2-a716-ba31e1130206.jpg)
 
 #
