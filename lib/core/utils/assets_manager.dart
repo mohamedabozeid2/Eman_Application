@@ -8,7 +8,7 @@ class AssetsManager {
   static const String radio = "$imagePath/radio.png";
   static const String praying = "$imagePath/praying.png";
   static const String star = "$imagePath/star.png";
-  static const String hadith = "$imagePath/hadith.png";
+  static const String appLogo = "$imagePath/appLogo.png";
   static const String lantern = "$imagePath/lantern.png";
   static const String compass = "$imagePath/compass.svg";
   static const String needle = "$imagePath/needle.svg";

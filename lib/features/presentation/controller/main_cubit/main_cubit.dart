@@ -12,6 +12,7 @@ import 'package:eman_application/features/presentation/controller/main_cubit/mai
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../../../../core/utils/app_fonts.dart';
 import '../../../domain/entities/radio.dart';
@@ -123,6 +124,38 @@ class MainCubit extends Cubit<MainStates> {
     });
   }
 
+  Future<void> startSurahAudio(
+    AudioPlayer audioPlayer,
+  ) async {
+    emit(MainStartSurahAudioLoadingState());
+    await CheckConnection.checkConnection().then((value) {
+      internetConnection = value;
+      if (value) {
+        audioPlayer.setAudioSource(
+          AudioSource.uri(
+            Uri.parse(surahAudioUrl!),
+          ),
+        );
+        emit(MainStartSurahAudioSuccessState());
+      } else {
+        Components.showSnackBar(
+          title: AppStrings.appName,
+          message: AppStrings.noInternetForAudio,
+          backgroundColor: Colors.white,
+          textColor: AppColors.tealColor,
+          durationWithMilliSeconds: 2000,
+        );
+        emit(MainStartSurahAudioErrorState());
+      }
+    });
+  }
+
+  void stopSurahAudio(AudioPlayer audioPlayer,){
+    emit(MainStopSurahAudioLoadingState());
+    audioPlayer.pause();
+    emit(MainStopSurahAudioSuccessState());
+  }
+
   Future<Either<Failure, SurahAudio>> callSurahAudio({
     required int surahIndex,
   }) async {
@@ -133,7 +166,7 @@ class MainCubit extends Cubit<MainStates> {
     bool fromAzkarScreen = false,
   }) async {
     // print(isAzkarDownloaded);
-    if(fromAzkarScreen){
+    if (fromAzkarScreen) {
       emit(MainGetAzkarLoadingState());
     }
     if (!isAzkarDownloaded) {
@@ -150,7 +183,7 @@ class MainCubit extends Cubit<MainStates> {
             HiveHelper.putInAzkar(model: azkar!);
             HiveHelper.putIsAzkarDownloaded(isAzkarDownloadedValue: true);
             isAzkarDownloaded = true;
-            if(fromAzkarScreen){
+            if (fromAzkarScreen) {
               emit(MainGetAzkarSuccessState());
             }
           });

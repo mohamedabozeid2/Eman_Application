@@ -2,8 +2,6 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:eman_application/core/utils/assets_manager.dart';
 import 'package:eman_application/core/utils/colors.dart';
 import 'package:eman_application/core/utils/components.dart';
-import 'package:eman_application/core/utils/constants.dart';
-import 'package:eman_application/core/utils/strings.dart';
 import 'package:eman_application/core/widgets/adaptive_indicator.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
@@ -39,6 +37,8 @@ class _SurahScreenState extends State<SurahScreen> {
   String surahContent = "";
   bool isSurahAudioPlaying = false;
   AudioPlayer audioPlayer = AudioPlayer();
+  Color audioPlayerColor = Colors.red;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void dispose() {
@@ -51,8 +51,10 @@ class _SurahScreenState extends State<SurahScreen> {
     MainCubit.get(context).surahAudioUrl = null;
     for (int i = 0; i < widget.surah.ayahs.length; i++) {
       surahContent += "${widget.surah.ayahs[i].text} ";
+
       surahContent +=
           "\u06DD${arabicNumber.convert(widget.surah.ayahs[i].numberInSurah)}";
+      //
     }
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       scrollController.jumpTo(widget.jumpToPosition);
@@ -63,13 +65,13 @@ class _SurahScreenState extends State<SurahScreen> {
         );
       });
     });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       floatingActionButton: FloatingActionButton(
         onPressed: null,
         backgroundColor: Colors.transparent,
@@ -97,55 +99,79 @@ class _SurahScreenState extends State<SurahScreen> {
         ),
         iconTheme: IconThemeData(color: Colors.white, size: AppFontSize.s34),
         actions: [
-          GestureDetector(
-            onTap: () {
-              if (isSurahAudioPlaying) {
-                audioPlayer.pause();
+          BlocConsumer<MainCubit, MainStates>(
+            buildWhen: (previous, current) =>
+                current is MainStopSurahAudioSuccessState,
+            listener: (context, state) {
+              if (state is MainStopSurahAudioSuccessState) {
                 isSurahAudioPlaying = false;
-              } else {
-                Components.showToast(
-                  msg: AppStrings.noThingToPause,
-                  fontSize: AppFontSize.s15,
-                  textColor: AppColors.tealColor,
-                  color: Colors.white,
-                );
+                audioPlayerColor = Colors.red;
+                setState(() {});
               }
             },
-            child: Icon(
-              Icons.stop,
-              color: Colors.white,
-              size: AppFontSize.s34,
-            ),
+            builder: (context, state) {
+              return state is MainStopSurahAudioLoadingState
+                  ? Center(
+                      child: AdaptiveIndicator(
+                        os: Components.getOS(),
+                        color: Colors.white,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        if (isSurahAudioPlaying) {
+                          MainCubit.get(context).stopSurahAudio(
+                            audioPlayer,
+                          );
+                        }
+                      },
+                      child: Icon(
+                        Icons.stop,
+                        color: isSurahAudioPlaying
+                            ? Colors.white
+                            : audioPlayerColor,
+                        size: AppFontSize.s34,
+                      ),
+                    );
+            },
           ),
           BlocConsumer<MainCubit, MainStates>(
             buildWhen: (previous, current) =>
                 current is MainGetSurahAudioLoadingState ||
                 current is MainGetSurahAudioSuccessState ||
-                current is MainGetSurahAudioErrorState,
+                current is MainGetSurahAudioErrorState ||
+                current is MainStartSurahAudioLoadingState ||
+                current is MainStartSurahAudioSuccessState ||
+                current is MainStartSurahAudioErrorState,
             listener: (context, state) {
               if (state is MainGetSurahAudioSuccessState) {
                 audioPlayer.setAudioSource(AudioSource.uri(
                     Uri.parse(MainCubit.get(context).surahAudioUrl!)));
                 audioPlayer.play();
+                isSurahAudioPlaying = true;
+                audioPlayerColor = AppColors.mainColor;
+                setState(() {});
+              } else if (state is MainStartSurahAudioSuccessState) {
+                isSurahAudioPlaying = true;
+                audioPlayerColor = AppColors.mainColor;
+                audioPlayer.play();
+                setState(() {});
               }
             },
             builder: (context, state) {
               return GestureDetector(
                 onTap: () {
-                  if (!isSurahAudioPlaying && internetConnection) {
-                      isSurahAudioPlaying = true;
-                    MainCubit.get(context)
-                        .getSurahAudio(surahIndex: widget.surah.number);
-                  } else {
-                    Components.showToast(
-                      msg: AppStrings.audioIsAlreadyPlaying,
-                      fontSize: AppFontSize.s15,
-                      textColor: AppColors.tealColor,
-                      color: Colors.white,
-                    );
+                  if (!isSurahAudioPlaying) {
+                    if (MainCubit.get(context).surahAudioUrl == null) {
+                      MainCubit.get(context)
+                          .getSurahAudio(surahIndex: widget.surah.number);
+                    } else if (MainCubit.get(context).surahAudioUrl != null) {
+                      MainCubit.get(context).startSurahAudio(audioPlayer);
+                    }
                   }
                 },
-                child: state is MainGetSurahAudioLoadingState
+                child: state is MainGetSurahAudioLoadingState ||
+                        state is MainStartSurahAudioLoadingState
                     ? Center(
                         child: AdaptiveIndicator(
                           os: Components.getOS(),
@@ -156,7 +182,9 @@ class _SurahScreenState extends State<SurahScreen> {
                         backgroundColor: Colors.transparent,
                         child: Icon(
                           Icons.play_arrow_rounded,
-                          color: Colors.white,
+                          color: isSurahAudioPlaying
+                              ? audioPlayerColor
+                              : Colors.white,
                           size: AppFontSize.s34,
                         ),
                       ),

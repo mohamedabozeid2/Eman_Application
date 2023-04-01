@@ -5,7 +5,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/utils/helper.dart';
 import 'data_strings/data_strings.dart';
 
-class SealOfQuran extends StatelessWidget {
+class SealOfQuran extends StatefulWidget {
+  const SealOfQuran({Key? key}) : super(key: key);
+
+  @override
+  State<SealOfQuran> createState() => _SealOfQuranState();
+}
+
+class _SealOfQuranState extends State<SealOfQuran> {
   final List<String> data = [
     SealDataStrings.firstData,
     SealDataStrings.secondData,
@@ -19,8 +26,16 @@ class SealOfQuran extends StatelessWidget {
     SealDataStrings.tenthData,
     SealDataStrings.eleventhData,
   ];
+  String sealText = "";
 
-  SealOfQuran({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    for (int i = 0; i < data.length; i++) {
+      sealText += data[i];
+      sealText += " * ";
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +46,35 @@ class SealOfQuran extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSize.s15),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  padding: EdgeInsets.zero,
-                  itemBuilder: (context, index) {
-                    return Text(
-                      data[index],
-                      textDirection: TextDirection.rtl,
-                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Colors.white,
-                          ),
-                    );
-                  },
-                  itemCount: data.length,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                Text(
+                  sealText,
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Colors.white,
+                      ),
                 ),
-              )
-            ],
+                // Expanded(
+                //   child: ListView.builder(
+                //     physics: const BouncingScrollPhysics(),
+                //     padding: EdgeInsets.zero,
+                //     itemBuilder: (context, index) {
+                //       return Text(
+                //         data[index],
+                //         textDirection: TextDirection.rtl,
+                //         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                //               color: Colors.white,
+                //             ),
+                //       );
+                //     },
+                //     itemCount: data.length,
+                //   ),
+                // )
+              ],
+            ),
           ),
         ));
   }

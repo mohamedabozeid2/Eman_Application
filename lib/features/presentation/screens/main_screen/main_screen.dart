@@ -126,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                                     title: AppStrings.quran,
                                     firstColor: tapsColors[1],
                                     secondColor: tapsColors[11],
-                                    image: AssetsManager.hadith,
+                                    image: AssetsManager.appLogo,
                                     pathWidget: QuranScreen(),
                                   ),
                                 ),

@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: const [
               Image(
                 image: AssetImage(
-                  AssetsManager.hadith,
+                  AssetsManager.appLogo,
                 ),
               )
             ],

@@ -24,6 +24,13 @@ class MainGetSurahAudioSuccessState extends MainStates {}
 
 class MainGetSurahAudioErrorState extends MainStates {}
 
+class MainStartSurahAudioLoadingState extends MainStates{}
+class MainStartSurahAudioSuccessState extends MainStates{}
+class MainStartSurahAudioErrorState extends MainStates{}
+
+class MainStopSurahAudioLoadingState extends MainStates{}
+class MainStopSurahAudioSuccessState extends MainStates{}
+
 class MainRemoveBookmarkLoadingState extends MainStates {}
 
 class MainRemoveBookmarkSuccessState extends MainStates {}
