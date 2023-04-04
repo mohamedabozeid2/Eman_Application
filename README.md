@@ -4,35 +4,35 @@ It is an Islamic application where you can read Quran and Azkar every day, save 
 
 #
 
-![screen_1](https://user-images.githubusercontent.com/52718382/229702535-8d72fa2e-bc93-4d39-b211-663673fda36c.png)
+![screen_1](https://user-images.githubusercontent.com/52718382/229704268-0473008f-87e7-4235-aa4c-e7151cbbcbe3.png)
 
 #
 
-![screen_2](https://user-images.githubusercontent.com/52718382/229702540-027fc284-3846-4ebc-b225-a6fd33bcae58.png)
+![screen_2](https://user-images.githubusercontent.com/52718382/229704278-ebce8dcc-8f51-4931-90b6-b5dc1757a75f.png)
 
 #
 
-![screen_3](https://user-images.githubusercontent.com/52718382/229702544-09f3d003-470a-4ab5-a5a2-61a6bee5e11c.png)
+![screen_3](https://user-images.githubusercontent.com/52718382/229704287-e820038e-a9d0-4ba2-93ae-c5bba41b2c6a.png)
 
 #
 
-![screen_4](https://user-images.githubusercontent.com/52718382/229702553-251410e7-55b0-4efc-9761-aee152bcfcbf.png)
+![screen_4](https://user-images.githubusercontent.com/52718382/229704293-4d02a41e-0b64-47ef-abdd-55d69e027215.png)
 
 #
 
-![screen_5](https://user-images.githubusercontent.com/52718382/229702558-bd4c2837-fb37-4e5b-9e3d-93e1d7305f9c.png)
+![screen_5](https://user-images.githubusercontent.com/52718382/229704298-e3bfc523-c61c-4bd1-8831-614e36e1dc2d.png)
 
 #
 
-![screen_6](https://user-images.githubusercontent.com/52718382/229702564-4f12da35-a5ff-4e5f-99a7-fea112704cc3.png)
+![screen_6](https://user-images.githubusercontent.com/52718382/229704305-90002a09-e4c5-44e3-9a00-a0456dacad32.png)
 
 #
 
-![screen_7](https://user-images.githubusercontent.com/52718382/229702572-a16ade8d-2236-4b07-a418-15d8383a28b1.png)
+![screen_7](https://user-images.githubusercontent.com/52718382/229704314-7aef7533-2e2f-4f5e-8be2-d27d8525d781.png)
 
 #
 
-![screen_8](https://user-images.githubusercontent.com/52718382/229702576-0bc9f13a-3416-47e3-b6b2-b8e3ac9c3181.png)
+![screen_8](https://user-images.githubusercontent.com/52718382/229704322-3098c15e-bb75-4670-808c-71f73d3f3c88.png)
 
 #
 
