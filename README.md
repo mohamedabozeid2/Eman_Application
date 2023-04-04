@@ -1,36 +1,38 @@
-# EMAN
+# Eman
 
 It is an Islamic application where you can read Quran and Azkar every day, save your favourite parts in bookmarks so you can read them anytime, you can listen to the holy Quran radio and able to get your qibla to kappa so you can know about your Your destination in prayer.
 
-![Screenshot_2023-03-28-01-25-42-250_com example eman_application](https://user-images.githubusercontent.com/52718382/228089380-437f941d-263e-44ad-9d56-444dd8774720.jpg)
+#
+
+![screen_1](https://user-images.githubusercontent.com/52718382/229704268-0473008f-87e7-4235-aa4c-e7151cbbcbe3.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-50-360_com example eman_application](https://user-images.githubusercontent.com/52718382/228089694-47138902-a72b-44cb-9bbe-6cf9557ba1a4.jpg)
+![screen_2](https://user-images.githubusercontent.com/52718382/229704278-ebce8dcc-8f51-4931-90b6-b5dc1757a75f.png)
 
 #
 
-![Screenshot_2023-03-28-01-25-57-084_com example eman_application](https://user-images.githubusercontent.com/52718382/228089423-ff5b8767-1f56-46b2-a716-ba31e1130206.jpg)
+![screen_3](https://user-images.githubusercontent.com/52718382/229704287-e820038e-a9d0-4ba2-93ae-c5bba41b2c6a.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-12-807_com example eman_application](https://user-images.githubusercontent.com/52718382/228089440-a89ec8a5-75db-4348-93c4-9ec4f0c10dc9.jpg)
+![screen_4](https://user-images.githubusercontent.com/52718382/229704293-4d02a41e-0b64-47ef-abdd-55d69e027215.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-20-253_com example eman_application](https://user-images.githubusercontent.com/52718382/228089464-23fb50f0-d0d1-4bb5-8655-85f5fc6bc233.jpg)
+![screen_5](https://user-images.githubusercontent.com/52718382/229704298-e3bfc523-c61c-4bd1-8831-614e36e1dc2d.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-23-518_com example eman_application](https://user-images.githubusercontent.com/52718382/228089485-c7f1f575-76c0-4a4e-86d9-33f07d4d3f77.jpg)
+![screen_6](https://user-images.githubusercontent.com/52718382/229704305-90002a09-e4c5-44e3-9a00-a0456dacad32.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-31-064_com example eman_application](https://user-images.githubusercontent.com/52718382/228089504-d66cc10a-c7be-4d78-a344-8c66e0ac2a25.jpg)
+![screen_7](https://user-images.githubusercontent.com/52718382/229704314-7aef7533-2e2f-4f5e-8be2-d27d8525d781.png)
 
 #
 
-![Screenshot_2023-03-28-01-26-39-089_com example eman_application](https://user-images.githubusercontent.com/52718382/228089521-317df196-94c7-47e6-a162-a064e33c85cb.jpg)
+![screen_8](https://user-images.githubusercontent.com/52718382/229704322-3098c15e-bb75-4670-808c-71f73d3f3c88.png)
 
 #
 
