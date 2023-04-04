@@ -50,3 +50,7 @@ class AddToBookmarksSuccessState extends MainStates {}
 class MainGetAzkarLoadingState extends MainStates{}
 class MainGetAzkarSuccessState extends MainStates{}
 class MainGetAzkarErrorState extends MainStates{}
+
+class MainTaspehLoadingState extends MainStates{}
+class MainTaspehSuccessState extends MainStates{}
+class MainTaspehErrorState extends MainStates{}

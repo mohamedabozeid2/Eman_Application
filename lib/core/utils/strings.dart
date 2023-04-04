@@ -11,8 +11,11 @@ class AppStrings {
   static const String sealOfTheQuran = 'Seal Quran';
   static const String learnHowToPray = 'How To Pray';
   static const String qibla = 'Qibla';
+  static const String tasbih = 'Tasbih';
+  static const String sebha = 'Sebha';
   static const String retry = 'Retry';
   static const String refresh = 'Refresh';
+  static const String reset = 'Reset';
   static const String quranDownloaded = "Quran is downloaded successfully";
   static const String addedToBookmarks = "Added to bookmarks successfully";
   static const String emptyBookmarks = "Empty Bookmarks";

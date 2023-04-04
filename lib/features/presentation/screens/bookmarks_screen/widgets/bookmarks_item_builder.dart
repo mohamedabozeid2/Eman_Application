@@ -36,8 +36,8 @@ class BookmarksItemBuilder extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s10),
             gradient: LinearGradient(colors: [
-              AppColors.mainColor,
-              AppColors.navy,
+              AppColors.backgroundColor,
+              AppColors.tealColor,
             ], begin: Alignment.centerRight, end: Alignment.centerLeft),
           ),
           child: Padding(
@@ -82,7 +82,7 @@ class BookmarksItemBuilder extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.all(AppSize.s10),
                               decoration: BoxDecoration(
-                                color: AppColors.navy,
+                                color: AppColors.backgroundColor,
                                 borderRadius:
                                     BorderRadius.circular(AppSize.s10),
                               ),

@@ -18,6 +18,7 @@ import '../quran_screen/quran_screen.dart';
 import '../quran_screen/surah_screen.dart';
 import '../radio_screen/radio_screen.dart';
 import '../seal_of_quran/seal_of_quran.dart';
+import '../sebha_screen/sebha_screen.dart';
 import 'model/navigatorTapModel.dart';
 import 'widgets/navigator_tap.dart';
 
@@ -124,8 +125,8 @@ class _MainScreenState extends State<MainScreen> {
                                 NavigatorTap(
                                   navigatorTapModel: NavigatorTapModel(
                                     title: AppStrings.quran,
-                                    firstColor: tapsColors[1],
-                                    secondColor: tapsColors[11],
+                                    firstColor: tapsColors[11],
+                                    secondColor: tapsColors[1],
                                     image: AssetsManager.appLogo,
                                     pathWidget: QuranScreen(),
                                   ),
@@ -133,8 +134,8 @@ class _MainScreenState extends State<MainScreen> {
                                 NavigatorTap(
                                   navigatorTapModel: NavigatorTapModel(
                                     title: AppStrings.bookmarks,
-                                    firstColor: tapsColors[8],
-                                    secondColor: tapsColors[9],
+                                    firstColor: tapsColors[1],
+                                    secondColor: tapsColors[3],
                                     image: AssetsManager.bookmarks,
                                     pathWidget: const BookmarksScreen(),
                                   ),
@@ -142,7 +143,7 @@ class _MainScreenState extends State<MainScreen> {
                                 NavigatorTap(
                                   navigatorTapModel: NavigatorTapModel(
                                     title: AppStrings.radio,
-                                    firstColor: tapsColors[6],
+                                    firstColor: tapsColors[1],
                                     secondColor: tapsColors[8],
                                     image: AssetsManager.radio,
                                     pathWidget: const RadioScreen(),
@@ -150,9 +151,18 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                                 NavigatorTap(
                                   navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.qibla,
+                                    title: AppStrings.tasbih,
                                     firstColor: tapsColors[10],
-                                    secondColor: tapsColors[8],
+                                    secondColor: tapsColors[1],
+                                    image: AssetsManager.tasbih,
+                                    pathWidget: const Sebha(),
+                                  ),
+                                ),
+                                NavigatorTap(
+                                  navigatorTapModel: NavigatorTapModel(
+                                    title: AppStrings.qibla,
+                                    firstColor: tapsColors[3],
+                                    secondColor: tapsColors[1],
                                     image: AssetsManager.praying,
                                     pathWidget: const Qibla(),
                                   ),
@@ -175,15 +185,7 @@ class _MainScreenState extends State<MainScreen> {
                                 //   ),
                                 // ),
 
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.sealOfTheQuran,
-                                    firstColor: tapsColors[8],
-                                    secondColor: tapsColors[1],
-                                    image: AssetsManager.star,
-                                    pathWidget: SealOfQuran(),
-                                  ),
-                                ),
+
                                 // NavigatorTap(
                                 //   navigatorTapModel: NavigatorTapModel(
                                 //     title: AppStrings.share,
@@ -193,6 +195,21 @@ class _MainScreenState extends State<MainScreen> {
                                 //   ),
                                 // ),
                               ],
+                            ),
+                            SizedBox(
+                              height: AppSize.s20,
+                            ),
+                            AspectRatio(
+                              aspectRatio: 1.7,
+                              child: NavigatorTap(
+                                navigatorTapModel: NavigatorTapModel(
+                                  title: AppStrings.sealOfTheQuran,
+                                  firstColor: tapsColors[8],
+                                  secondColor: tapsColors[1],
+                                  image: AssetsManager.star,
+                                  pathWidget: const SealOfQuran(),
+                                ),
+                              ),
                             ),
                             SizedBox(
                               height: AppSize.s20,

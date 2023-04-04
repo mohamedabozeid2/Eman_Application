@@ -38,10 +38,14 @@ class SurahItemBuilder extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppSize.s10),
-            gradient: LinearGradient(colors: [
-              AppColors.tealColor,
-              AppColors.navy,
-            ], begin: Alignment.centerRight, end: Alignment.centerLeft),
+            gradient: LinearGradient(
+              colors: [
+                AppColors.backgroundColor,
+                AppColors.tealColor,
+              ],
+              begin: Alignment.centerRight,
+              end: Alignment.centerLeft,
+            ),
           ),
           child: Row(
             children: [

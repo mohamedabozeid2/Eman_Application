@@ -1,6 +1,5 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:eman_application/core/utils/constants.dart';
-import 'package:eman_application/core/widgets/divider.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/app_values.dart';
@@ -37,9 +36,8 @@ class QuranScreen extends StatelessWidget {
                     return SurahItemBuilder(surah: quranData!.surahs[index]);
                   },
                   separatorBuilder: (context, index) {
-                    return MyDivider(
-                      color: Colors.white,
-                      paddingHorizontal: AppSize.s20,
+                    return SizedBox(
+                      height: AppSize.s5,
                     );
                   },
                   itemCount: quranData!.surahs.length,

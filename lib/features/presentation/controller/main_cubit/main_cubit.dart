@@ -150,7 +150,9 @@ class MainCubit extends Cubit<MainStates> {
     });
   }
 
-  void stopSurahAudio(AudioPlayer audioPlayer,){
+  void stopSurahAudio(
+    AudioPlayer audioPlayer,
+  ) {
     emit(MainStopSurahAudioLoadingState());
     audioPlayer.pause();
     emit(MainStopSurahAudioSuccessState());
@@ -284,4 +286,19 @@ class MainCubit extends Cubit<MainStates> {
     HiveHelper.putInBookmarksList(model: bookmarks);
     emit(MainRemoveBookmarkSuccessState());
   }
+
+  bool taspehCount({required int counter}) {
+    emit(MainTaspehLoadingState());
+    counter++;
+    if (counter == 34) {
+      emit(MainTaspehSuccessState());
+      return true;
+    } else {
+      emit(MainTaspehSuccessState());
+      return false;
+    }
+  }
+
+
+
 }

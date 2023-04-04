@@ -2,7 +2,6 @@ import 'package:eman_application/core/utils/app_fonts.dart';
 import 'package:eman_application/core/utils/assets_manager.dart';
 import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/utils/strings.dart';
-import 'package:eman_application/core/widgets/divider.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
 import 'package:eman_application/features/presentation/screens/bookmarks_screen/widgets/bookmarks_item_builder.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../core/utils/app_values.dart';
 import '../../../../core/utils/helper.dart';
 
 class BookmarksScreen extends StatelessWidget {
@@ -72,8 +72,8 @@ class BookmarksScreen extends StatelessWidget {
                           );
                         },
                         separatorBuilder: (context, index) {
-                          return MyDivider(
-                            color: Colors.white,
+                          return SizedBox(
+                            height:AppSize.s5,
                           );
                         },
                         itemCount: bookmarks.length,
