@@ -68,35 +68,40 @@ class SurahItemBuilder extends StatelessWidget {
               SizedBox(
                 width: AppSize.s10,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    surah.englishName,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(color: Colors.white),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    surah.englishNameTranslation,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: Colors.white),
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
+              Expanded(
+                flex: 4,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      surah.englishName,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium!
+                          .copyWith(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      surah.englishNameTranslation,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ),
               ),
               const Spacer(),
               Text(
                 surah.name,
+                textAlign: TextAlign.start,
+                textDirection: TextDirection.rtl,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
                     .copyWith(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

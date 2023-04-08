@@ -192,8 +192,8 @@ class _MainScreenState extends State<MainScreen> {
                               child: NavigatorTap(
                                 navigatorTapModel: NavigatorTapModel(
                                   title: AppStrings.sealOfTheQuran,
-                                  firstColor: tapsColors[8],
-                                  secondColor: tapsColors[1],
+                                  firstColor: tapsColors[1],
+                                  secondColor: tapsColors[10],
                                   image: AssetsManager.star,
                                   pathWidget: const SealOfQuran(),
                                 ),

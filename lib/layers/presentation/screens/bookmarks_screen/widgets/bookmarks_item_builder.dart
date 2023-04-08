@@ -46,22 +46,33 @@ class BookmarksItemBuilder extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      bookmark.surah.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: Colors.white),
-                    ),
-                    Text(
-                      bookmark.date,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: Colors.white,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              bookmark.surah.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(color: Colors.white),
+                            ),
                           ),
-                    ),
-                  ],
+                        ],
+                      ),
+                      Text(
+                        bookmark.date,
+                        textAlign: TextAlign.start,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: Colors.white,
+                            ),
+                      ),
+                    ],
+                  ),
                 ),
                 BlocConsumer<MainCubit, MainStates>(
                   buildWhen: (previous, current) =>

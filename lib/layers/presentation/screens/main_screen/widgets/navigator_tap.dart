@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../model/navigatorTapModel.dart';
 
-class NavigatorTap extends StatelessWidget {
+class NavigatorTap extends StatefulWidget {
   final NavigatorTapModel navigatorTapModel;
   final bool fromLastRead;
 
@@ -19,19 +19,42 @@ class NavigatorTap extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<NavigatorTap> createState() => _NavigatorTapState();
+}
+
+class _NavigatorTapState extends State<NavigatorTap> {
+  late double tapTextWidth;
+
+  @override
+  void initState() {
+    if (widget.fromLastRead) {
+      tapTextWidth =
+          Helper.maxWidth * 0.7 - Helper.maxWidth * 0.2 - AppSize.s20;
+    } else if (widget.navigatorTapModel.title == AppStrings.sealOfTheQuran) {
+      tapTextWidth = Helper.maxWidth * 0.8;
+    } else {
+      tapTextWidth = Helper.maxWidth * 0.4 - AppSize.s15 - AppSize.s25;
+    }
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Components.navigateTo(
           context,
-          navigatorTapModel.pathWidget,
+          widget.navigatorTapModel.pathWidget,
         );
       },
       child: Material(
         elevation: 5.5,
         borderRadius: BorderRadius.circular(AppSize.s25),
         child: Container(
-          width: fromLastRead ? Helper.maxWidth * 0.8 : Helper.maxWidth * 0.4,
+          width: widget.fromLastRead
+              ? Helper.maxWidth * 0.8
+              : Helper.maxWidth * 0.4,
           padding: EdgeInsets.all(AppSize.s15),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -42,8 +65,8 @@ class NavigatorTap extends StatelessWidget {
                 0.7,
               ],
               colors: [
-                navigatorTapModel.firstColor,
-                navigatorTapModel.secondColor,
+                widget.navigatorTapModel.firstColor,
+                widget.navigatorTapModel.secondColor,
               ],
             ),
             borderRadius: BorderRadius.circular(AppSize.s25),
@@ -52,13 +75,14 @@ class NavigatorTap extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  fromLastRead
+                  widget.fromLastRead
                       ? Padding(
                           padding: EdgeInsets.symmetric(vertical: AppSize.s10),
                           child: Text(
-                            navigatorTapModel.title,
+                            widget.navigatorTapModel.title,
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
@@ -66,38 +90,51 @@ class NavigatorTap extends StatelessWidget {
                           ),
                         )
                       : Container(),
-                  fromLastRead
+                  widget.fromLastRead
                       ? Container()
                       : Image.asset(
-                          navigatorTapModel.image,
+                          widget.navigatorTapModel.image,
                           width: Helper.maxWidth * 0.2,
                         ),
                   Padding(
                     padding: EdgeInsets.only(
                       bottom: AppSize.s10,
-                      top: fromLastRead ? AppSize.s10 : AppSize.s30,
+                      top: widget.fromLastRead ? AppSize.s10 : AppSize.s30,
                     ),
-                    child: Column(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          fromLastRead
-                              ? lastRead!.surah.name
-                              : navigatorTapModel.title,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: Colors.white),
-                        ),
-                        fromLastRead
-                            ? Text(
-                                lastRead!.date,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: tapTextWidth,
+                              child: Text(
+                                widget.fromLastRead
+                                    ? lastRead!.surah.name
+                                    : widget.navigatorTapModel.title,
+                                overflow: TextOverflow.ellipsis,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .bodySmall!
+                                    .bodyMedium!
                                     .copyWith(color: Colors.white),
-                              )
-                            : Container(),
+                              ),
+                            ),
+                            widget.fromLastRead
+                                ? Text(
+                                    lastRead!.date,
+                                    textAlign: TextAlign.start,
+                                    textDirection: TextDirection.ltr,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                          color: Colors.white,
+                                        ),
+                                  )
+                                : Container(),
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -107,6 +144,7 @@ class NavigatorTap extends StatelessWidget {
                       children: [
                         Text(
                           AppStrings.goTo,
+                          textAlign: TextAlign.start,
                           style:
                               Theme.of(context).textTheme.bodySmall!.copyWith(
                                     color: Colors.white,
@@ -125,9 +163,9 @@ class NavigatorTap extends StatelessWidget {
                   ),
                 ],
               ),
-              fromLastRead
+              widget.fromLastRead
                   ? Image.asset(
-                      navigatorTapModel.image,
+                      widget.navigatorTapModel.image,
                       width: Helper.maxWidth * 0.2,
                     )
                   : Container(),

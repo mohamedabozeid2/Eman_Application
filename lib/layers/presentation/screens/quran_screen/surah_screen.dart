@@ -90,107 +90,116 @@ class _SurahScreenState extends State<SurahScreen> {
       ),
       appBar: AppBar(
         toolbarHeight: Helper.maxHeight * 0.15,
-        title: Text(
-          widget.surah.name,
-          style: Theme.of(context)
-              .textTheme
-              .displaySmall!
-              .copyWith(color: Colors.white),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                widget.surah.name,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(color: Colors.white),
+              ),
+            ),
+            BlocConsumer<MainCubit, MainStates>(
+              buildWhen: (previous, current) =>
+              current is MainStopSurahAudioSuccessState,
+              listener: (context, state) {
+                if (state is MainStopSurahAudioSuccessState) {
+                  isSurahAudioPlaying = false;
+                  audioPlayerColor = Colors.red;
+                  setState(() {});
+                }
+              },
+              builder: (context, state) {
+                return state is MainStopSurahAudioLoadingState
+                    ? Center(
+                  child: AdaptiveIndicator(
+                    os: Components.getOS(),
+                    color: Colors.white,
+                  ),
+                )
+                    : GestureDetector(
+                  onTap: () {
+                    if (isSurahAudioPlaying) {
+                      MainCubit.get(context).stopSurahAudio(
+                        audioPlayer,
+                      );
+                    }
+                  },
+                  child: Icon(
+                    Icons.stop,
+                    color: isSurahAudioPlaying
+                        ? Colors.white
+                        : audioPlayerColor,
+                    size: AppFontSize.s34,
+                  ),
+                );
+              },
+            ),
+            BlocConsumer<MainCubit, MainStates>(
+              buildWhen: (previous, current) =>
+              current is MainGetSurahAudioLoadingState ||
+                  current is MainGetSurahAudioSuccessState ||
+                  current is MainGetSurahAudioErrorState ||
+                  current is MainStartSurahAudioLoadingState ||
+                  current is MainStartSurahAudioSuccessState ||
+                  current is MainStartSurahAudioErrorState,
+              listener: (context, state) {
+                if (state is MainGetSurahAudioSuccessState) {
+                  audioPlayer.setAudioSource(AudioSource.uri(
+                      Uri.parse(MainCubit.get(context).surahAudioUrl!)));
+                  audioPlayer.play();
+                  isSurahAudioPlaying = true;
+                  audioPlayerColor = AppColors.mainColor;
+                  setState(() {});
+                } else if (state is MainStartSurahAudioSuccessState) {
+                  isSurahAudioPlaying = true;
+                  audioPlayerColor = AppColors.mainColor;
+                  audioPlayer.play();
+                  setState(() {});
+                }
+              },
+              builder: (context, state) {
+                return GestureDetector(
+                  onTap: () {
+                    if (!isSurahAudioPlaying) {
+                      if (MainCubit.get(context).surahAudioUrl == null) {
+                        MainCubit.get(context)
+                            .getSurahAudio(surahIndex: widget.surah.number);
+                      } else if (MainCubit.get(context).surahAudioUrl != null) {
+                        MainCubit.get(context).startSurahAudio(audioPlayer);
+                      }
+                    }
+                  },
+                  child: state is MainGetSurahAudioLoadingState ||
+                      state is MainStartSurahAudioLoadingState
+                      ? Center(
+                    child: AdaptiveIndicator(
+                      os: Components.getOS(),
+                      color: Colors.white,
+                    ),
+                  )
+                      : CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    child: Icon(
+                      Icons.play_arrow_rounded,
+                      color: isSurahAudioPlaying
+                          ? audioPlayerColor
+                          : Colors.white,
+                      size: AppFontSize.s34,
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
         ),
         iconTheme: IconThemeData(color: Colors.white, size: AppFontSize.s34),
         actions: [
-          BlocConsumer<MainCubit, MainStates>(
-            buildWhen: (previous, current) =>
-                current is MainStopSurahAudioSuccessState,
-            listener: (context, state) {
-              if (state is MainStopSurahAudioSuccessState) {
-                isSurahAudioPlaying = false;
-                audioPlayerColor = Colors.red;
-                setState(() {});
-              }
-            },
-            builder: (context, state) {
-              return state is MainStopSurahAudioLoadingState
-                  ? Center(
-                      child: AdaptiveIndicator(
-                        os: Components.getOS(),
-                        color: Colors.white,
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        if (isSurahAudioPlaying) {
-                          MainCubit.get(context).stopSurahAudio(
-                            audioPlayer,
-                          );
-                        }
-                      },
-                      child: Icon(
-                        Icons.stop,
-                        color: isSurahAudioPlaying
-                            ? Colors.white
-                            : audioPlayerColor,
-                        size: AppFontSize.s34,
-                      ),
-                    );
-            },
-          ),
-          BlocConsumer<MainCubit, MainStates>(
-            buildWhen: (previous, current) =>
-                current is MainGetSurahAudioLoadingState ||
-                current is MainGetSurahAudioSuccessState ||
-                current is MainGetSurahAudioErrorState ||
-                current is MainStartSurahAudioLoadingState ||
-                current is MainStartSurahAudioSuccessState ||
-                current is MainStartSurahAudioErrorState,
-            listener: (context, state) {
-              if (state is MainGetSurahAudioSuccessState) {
-                audioPlayer.setAudioSource(AudioSource.uri(
-                    Uri.parse(MainCubit.get(context).surahAudioUrl!)));
-                audioPlayer.play();
-                isSurahAudioPlaying = true;
-                audioPlayerColor = AppColors.mainColor;
-                setState(() {});
-              } else if (state is MainStartSurahAudioSuccessState) {
-                isSurahAudioPlaying = true;
-                audioPlayerColor = AppColors.mainColor;
-                audioPlayer.play();
-                setState(() {});
-              }
-            },
-            builder: (context, state) {
-              return GestureDetector(
-                onTap: () {
-                  if (!isSurahAudioPlaying) {
-                    if (MainCubit.get(context).surahAudioUrl == null) {
-                      MainCubit.get(context)
-                          .getSurahAudio(surahIndex: widget.surah.number);
-                    } else if (MainCubit.get(context).surahAudioUrl != null) {
-                      MainCubit.get(context).startSurahAudio(audioPlayer);
-                    }
-                  }
-                },
-                child: state is MainGetSurahAudioLoadingState ||
-                        state is MainStartSurahAudioLoadingState
-                    ? Center(
-                        child: AdaptiveIndicator(
-                          os: Components.getOS(),
-                          color: Colors.white,
-                        ),
-                      )
-                    : CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        child: Icon(
-                          Icons.play_arrow_rounded,
-                          color: isSurahAudioPlaying
-                              ? audioPlayerColor
-                              : Colors.white,
-                          size: AppFontSize.s34,
-                        ),
-                      ),
-              );
-            },
-          )
+
         ],
       ),
       body: CustomScrollView(

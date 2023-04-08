@@ -52,6 +52,7 @@ class _SealOfQuranState extends State<SealOfQuran> {
               children: [
                 Text(
                   sealText,
+                  textAlign: TextAlign.center,
                   textDirection: TextDirection.rtl,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Colors.white,
