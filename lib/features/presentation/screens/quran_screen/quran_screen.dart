@@ -19,7 +19,7 @@ class QuranScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: Helper.maxHeight * 0.15,
         title: const Text(
-          'My ${AppStrings.appName}',
+          AppStrings.appName,
         ),
       ),
       body: CustomScrollView(

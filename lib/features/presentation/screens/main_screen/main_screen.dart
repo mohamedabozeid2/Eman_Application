@@ -6,6 +6,7 @@ import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/utils/helper.dart';
 import 'package:eman_application/features/presentation/screens/azkar_screen/azkar_screen.dart';
 import 'package:eman_application/features/presentation/screens/qibla_screen/qibla_screen.dart';
+import 'package:eman_application/features/presentation/screens/server_error_screen/server_error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +53,12 @@ class _MainScreenState extends State<MainScreen> {
         buildWhen: (previous, current) =>
             current is MainGetQuranLoadingState ||
             current is MainGetQuranSuccessState,
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is MainGetQuranServerErrorState) {
+            Components.navigateAndFinish(
+                context: context, widget: const ServerErrorScreen());
+          }
+        },
         builder: (context, state) {
           return state is MainGetQuranLoadingState
               ? Center(
@@ -66,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
                   slivers: [
                     SliverAppBar(
                       title: Text(
-                        'My ${AppStrings.appName}',
+                        AppStrings.appName,
                         style: Theme.of(context)
                             .textTheme
                             .displaySmall!
@@ -185,7 +191,6 @@ class _MainScreenState extends State<MainScreen> {
                                 //   ),
                                 // ),
 
-
                                 // NavigatorTap(
                                 //   navigatorTapModel: NavigatorTapModel(
                                 //     title: AppStrings.share,
@@ -200,7 +205,7 @@ class _MainScreenState extends State<MainScreen> {
                               height: AppSize.s20,
                             ),
                             AspectRatio(
-                              aspectRatio: 1.7,
+                              aspectRatio: 1.6,
                               child: NavigatorTap(
                                 navigatorTapModel: NavigatorTapModel(
                                   title: AppStrings.sealOfTheQuran,

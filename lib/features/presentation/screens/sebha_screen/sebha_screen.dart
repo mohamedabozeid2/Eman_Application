@@ -42,6 +42,7 @@ class _SebhaState extends State<Sebha> {
         physics: const BouncingScrollPhysics(),
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               BlocConsumer<MainCubit, MainStates>(

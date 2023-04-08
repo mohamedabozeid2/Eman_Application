@@ -53,7 +53,7 @@ void main() async {
   late Widget startWidget;
 
   if (!isQuranDownloaded && !internetConnection) {
-    startWidget = const NoInternetScreen();
+    startWidget = NoInternetScreen();
   } else {
     startWidget = const Layout();
   }

@@ -37,14 +37,25 @@ class _QiblaState extends State<Qibla> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Error: ${snapshot.error.toString()}"),
+              child: Text(
+                "Error: ${snapshot.error.toString()}",
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Colors.white,
+                    ),
+                textAlign: TextAlign.center,
+              ),
             );
           } else if (snapshot.data!) {
             return const QiblahCompass();
           } else {
-            return const Center(
+            return Center(
               child: Text(
                 AppStrings.yourDeviceIsNotSupported,
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(color: Colors.white),
               ),
             );
           }

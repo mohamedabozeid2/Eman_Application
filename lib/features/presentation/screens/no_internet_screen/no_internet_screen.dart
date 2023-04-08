@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class NoInternetScreen extends StatelessWidget {
-  const NoInternetScreen({Key? key}) : super(key: key);
+
+  const NoInternetScreen({Key? key,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +30,13 @@ class NoInternetScreen extends StatelessWidget {
                   ),
               textAlign: TextAlign.center,
             ),
-
             SizedBox(
               height: AppSize.s10,
             ),
             GestureDetector(
               onTap: () {
-                CheckConnection.checkConnection().then((value){
-                  if(value){
+                CheckConnection.checkConnection().then((value) {
+                  if (value) {
                     Components.navigateAndFinish(
                         context: context, widget: const Layout());
                   }

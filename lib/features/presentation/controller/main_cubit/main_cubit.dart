@@ -9,6 +9,7 @@ import 'package:eman_application/core/utils/strings.dart';
 import 'package:eman_application/features/domain/entities/azkar.dart';
 import 'package:eman_application/features/domain/entities/quran_model.dart';
 import 'package:eman_application/features/presentation/controller/main_cubit/main_status.dart';
+import 'package:eman_application/features/presentation/screens/no_internet_screen/no_internet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -84,7 +85,12 @@ class MainCubit extends Cubit<MainStates> {
               textColor: Colors.white,
             );
             emit(MainGetQuranSuccessState());
+          }).catchError((error){
+            emit(MainGetQuranServerErrorState());
           });
+        }else{
+          Components.navigateAndFinish(context: context, widget: const NoInternetScreen());
+          emit(MainGetQuranErrorState());
         }
       });
     }

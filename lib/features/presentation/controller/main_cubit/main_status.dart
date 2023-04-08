@@ -17,6 +17,7 @@ class MainGetQuranLoadingState extends MainStates {}
 class MainGetQuranSuccessState extends MainStates {}
 
 class MainGetQuranErrorState extends MainStates {}
+class MainGetQuranServerErrorState extends MainStates {}
 
 class MainGetSurahAudioLoadingState extends MainStates {}
 

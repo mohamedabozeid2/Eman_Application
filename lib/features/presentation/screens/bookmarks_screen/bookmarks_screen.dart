@@ -26,9 +26,11 @@ class BookmarksScreen extends StatelessWidget {
             color: Colors.white,
             iconSize: AppFontSize.s30,
             position: PopupMenuPosition.under,
-            onSelected: (value){
-              if(value == 0){
-                MainCubit.get(context).clearBookmarks();
+            onSelected: (value) {
+              if (value == 0) {
+                if (bookmarks.isNotEmpty) {
+                  MainCubit.get(context).clearBookmarks();
+                }
               }
             },
             itemBuilder: (context) {
@@ -48,17 +50,24 @@ class BookmarksScreen extends StatelessWidget {
         builder: (context, state) {
           return bookmarks.isEmpty
               ? SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Lottie.asset(AssetsManager.empty),
-                      Text(
-                        AppStrings.emptyBookmarks,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(color: Colors.white),
-                      )
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.all(AppSize.s10),
+                    child: Column(
+                      children: [
+                        Lottie.asset(AssetsManager.empty),
+                        SizedBox(
+                          height: AppSize.s15,
+                        ),
+                        Text(
+                          AppStrings.emptyBookmarks,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: Colors.white),
+                        )
+                      ],
+                    ),
                   ),
                 )
               : Column(
@@ -73,7 +82,7 @@ class BookmarksScreen extends StatelessWidget {
                         },
                         separatorBuilder: (context, index) {
                           return SizedBox(
-                            height:AppSize.s5,
+                            height: AppSize.s5,
                           );
                         },
                         itemCount: bookmarks.length,

@@ -30,7 +30,7 @@ class Components {
     required String title,
     required String message,
     required Color backgroundColor,
-    int durationWithMilliSeconds = 1000,
+    int durationWithMilliSeconds = 2000,
     required Color textColor,
   }) {
     Get.snackbar(title, message,
