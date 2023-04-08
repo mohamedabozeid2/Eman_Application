@@ -1,12 +1,14 @@
-import 'package:eman_application/features/data/models/single_azkar_model.dart';
-import 'package:eman_application/features/domain/entities/azkar.dart';
-import 'package:eman_application/features/domain/entities/surah_bookmark_model.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
-import '../../features/domain/entities/ayah_model.dart';
-import '../../features/domain/entities/quran_data_model.dart';
-import '../../features/domain/entities/quran_model.dart';
-import '../../features/domain/entities/surah_model.dart';
+
+import '../../layers/data/models/single_azkar_model.dart';
+import '../../layers/domain/entities/ayah_model.dart';
+import '../../layers/domain/entities/azkar.dart';
+import '../../layers/domain/entities/quran_data_model.dart';
+import '../../layers/domain/entities/quran_model.dart';
+import '../../layers/domain/entities/surah_bookmark_model.dart';
+import '../../layers/domain/entities/surah_model.dart';
 import 'hive_keys.dart';
 
 class HiveHelper {

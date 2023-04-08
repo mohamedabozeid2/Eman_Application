@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:eman_application/core/api/eman_dio_helper.dart';
-import 'package:eman_application/features/presentation/screens/no_internet_screen/no_internet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,8 +13,9 @@ import 'core/hive/hive_keys.dart';
 import 'core/network/check_connection.dart';
 import 'core/services/service_locator.dart';
 import 'core/utils/constants.dart';
-import 'features/presentation/controller/BlocObserver/BlocObserver.dart';
-import 'features/presentation/screens/layout/layout.dart';
+import 'layers/presentation/controller/BlocObserver/BlocObserver.dart';
+import 'layers/presentation/screens/layout/layout.dart';
+import 'layers/presentation/screens/no_internet_screen/no_internet_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

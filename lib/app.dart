@@ -1,5 +1,4 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,7 @@ import 'package:get/get.dart';
 import 'config/themes/light_theme.dart';
 import 'core/services/service_locator.dart';
 import 'core/utils/strings.dart';
+import 'layers/presentation/controller/main_cubit/main_cubit.dart';
 
 class EmanApplication extends StatelessWidget {
   final Widget startWidget;

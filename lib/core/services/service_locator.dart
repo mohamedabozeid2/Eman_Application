@@ -1,13 +1,15 @@
-import 'package:eman_application/features/data/data_sources/eman_data_source.dart';
-import 'package:eman_application/features/domain/repositories/base_eman_repository.dart';
-import 'package:eman_application/features/domain/use_cases/get_azkar.dart';
-import 'package:eman_application/features/domain/use_cases/get_quran.dart';
-import 'package:eman_application/features/domain/use_cases/get_radio.dart';
-import 'package:eman_application/features/domain/use_cases/get_surah_audio.dart';
-import 'package:eman_application/features/presentation/controller/main_cubit/main_cubit.dart';
+
 import 'package:get_it/get_it.dart';
 
-import '../../features/data/repositories/eman_repository.dart';
+import '../../layers/data/data_sources/eman_data_source.dart';
+import '../../layers/data/repositories/eman_repository.dart';
+import '../../layers/domain/repositories/base_eman_repository.dart';
+import '../../layers/domain/use_cases/get_azkar.dart';
+import '../../layers/domain/use_cases/get_quran.dart';
+import '../../layers/domain/use_cases/get_radio.dart';
+import '../../layers/domain/use_cases/get_surah_audio.dart';
+import '../../layers/presentation/controller/main_cubit/main_cubit.dart';
+
 
 final sl = GetIt.instance;
 
