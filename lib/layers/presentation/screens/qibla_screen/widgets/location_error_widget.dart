@@ -19,19 +19,19 @@ class LocationErrorWidget extends StatelessWidget {
           Icon(
             Icons.location_off,
             size: AppSize.s150,
-            color: AppColors.blue,
+            color: Colors.white,
           ),
           SizedBox(
             height: AppSize.s30,
           ),
           Text(
             error!,
-            style: TextStyle(
-              color: AppColors.blue,
-              fontWeight: FontWeight.bold,
-            ),
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Colors.white,
+                ),
+            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 32),
+          SizedBox(height: AppSize.s10),
           GestureDetector(
             onTap: () {
               if (callback != null) callback!();
@@ -39,7 +39,7 @@ class LocationErrorWidget extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(AppSize.s7),
               decoration: BoxDecoration(
-                color: AppColors.blue,
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(
                   AppSize.s10,
                 ),
@@ -47,7 +47,7 @@ class LocationErrorWidget extends StatelessWidget {
               child: Text(
                 AppStrings.retry,
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Colors.white,
+                      color: AppColors.backgroundColor,
                     ),
               ),
             ),

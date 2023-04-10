@@ -20,7 +20,7 @@ class BookmarksScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.bookmarks),
-        toolbarHeight: Helper.maxHeight * 0.15,
+        toolbarHeight: Helper.maxHeight * 0.1,
         actions: [
           PopupMenuButton(
             color: Colors.white,

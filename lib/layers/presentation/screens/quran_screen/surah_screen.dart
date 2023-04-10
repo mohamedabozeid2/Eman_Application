@@ -89,7 +89,7 @@ class _SurahScreenState extends State<SurahScreen> {
         ),
       ),
       appBar: AppBar(
-        toolbarHeight: Helper.maxHeight * 0.15,
+        toolbarHeight: Helper.maxHeight * 0.1,
         title: Row(
           children: [
             Expanded(

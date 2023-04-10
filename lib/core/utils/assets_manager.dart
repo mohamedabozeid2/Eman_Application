@@ -12,7 +12,7 @@ class AssetsManager {
   static const String lantern = "$imagePath/lantern.png";
   static const String sebha = "$imagePath/sebha.png";
   static const String tasbih = "$imagePath/tasbih.png";
-  static const String compass = "$imagePath/compass.svg";
+  static const String compass = "$imagePath/compass.png";
   static const String needle = "$imagePath/needle.svg";
   static const String noInternet = "$animsPath/noInternet.json";
   static const String empty = "$animsPath/empty.json";

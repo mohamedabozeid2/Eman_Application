@@ -100,7 +100,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
 }
 
 class QiblahCompassWidget extends StatelessWidget {
-  final _compassSvg = SvgPicture.asset(AssetsManager.compass);
+  final _compassSvg = Image.asset(AssetsManager.compass);
   final _needleSvg = SvgPicture.asset(
     AssetsManager.needle,
     fit: BoxFit.contain,

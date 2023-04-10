@@ -17,7 +17,7 @@ class QuranScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: Helper.maxHeight * 0.15,
+        toolbarHeight: Helper.maxHeight * 0.1,
         title: const Text(
           AppStrings.appName,
         ),

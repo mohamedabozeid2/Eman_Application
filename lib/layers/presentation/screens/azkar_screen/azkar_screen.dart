@@ -40,7 +40,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
     return Scaffold(
       // backgroundColor: AppColors.testTwo,
       appBar: AppBar(
-        toolbarHeight: Helper.maxHeight * 0.15,
+        toolbarHeight: Helper.maxHeight * 0.1,
         title: const Text(
           AppStrings.azkar,
         ),

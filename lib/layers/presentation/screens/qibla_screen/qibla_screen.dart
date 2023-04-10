@@ -22,7 +22,7 @@ class _QiblaState extends State<Qibla> {
     return Scaffold(
       // backgroundColor: AppColors.navy.withOpacity(0.9),
       appBar: AppBar(
-        toolbarHeight: Helper.maxHeight * 0.15,
+        toolbarHeight: Helper.maxHeight * 0.1,
         title: const Text(AppStrings.qibla),
       ),
       body: FutureBuilder(
