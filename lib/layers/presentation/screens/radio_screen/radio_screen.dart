@@ -36,101 +36,104 @@ class _RadioScreenState extends State<RadioScreen> {
           AppStrings.radio,
         ),
       ),
-      body: Column(
-        children: [
-          const Image(image: AssetImage(AssetsManager.radio)),
-          SizedBox(
-            height: AppSize.s30,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (radioModel != null) {
-                    if (!isRadioPlaying) {
-                      audioPlayer.setAudioSource(
-                          AudioSource.uri(Uri.parse(radioModel!.url)));
-                      audioPlayer.play();
-                      isRadioPlaying = true;
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            const Image(image: AssetImage(AssetsManager.radio)),
+            SizedBox(
+              height: AppSize.s30,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (radioModel != null) {
+                      if (!isRadioPlaying) {
+                        audioPlayer.setAudioSource(
+                            AudioSource.uri(Uri.parse(radioModel!.url)));
+                        audioPlayer.play();
+                        isRadioPlaying = true;
+                      } else {
+                        Components.showToast(
+                          msg: AppStrings.radioIsAlreadyPlaying,
+                          fontSize: AppFontSize.s15,
+                          textColor: AppColors.tealColor,
+                          color: Colors.white,
+                        );
+                      }
+                    } else {
+                      Components.showSnackBar(
+                        title: AppStrings.appName,
+                        message: AppStrings.radioIsNotAvailable,
+                        backgroundColor: Colors.white,
+                        textColor: AppColors.tealColor,
+                      );
+                    }
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(AppSize.s10),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColors.mainColor,
+                          AppColors.tealColor,
+                        ],
+                        stops: const [
+                          0.3,
+                          1.0,
+                        ],
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.play_arrow_rounded,
+                      color: Colors.white,
+                      size: AppFontSize.s34,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (isRadioPlaying) {
+                      audioPlayer.pause();
+                      isRadioPlaying = false;
                     } else {
                       Components.showToast(
-                        msg: AppStrings.radioIsAlreadyPlaying,
+                        msg: AppStrings.noThingToPause,
                         fontSize: AppFontSize.s15,
                         textColor: AppColors.tealColor,
                         color: Colors.white,
                       );
                     }
-                  } else {
-                    Components.showSnackBar(
-                      title: AppStrings.appName,
-                      message: AppStrings.radioIsNotAvailable,
-                      backgroundColor: Colors.white,
-                      textColor: AppColors.tealColor,
-                    );
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.all(AppSize.s10),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.mainColor,
-                        AppColors.tealColor,
-                      ],
-                      stops: const [
-                        0.3,
-                        1.0,
-                      ],
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(AppSize.s10),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColors.redErrorColor,
+                          AppColors.tealColor,
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        stops: const [
+                          0.3,
+                          1.0,
+                        ],
+                      ),
                     ),
-                  ),
-                  child: Icon(
-                    Icons.play_arrow_rounded,
-                    color: Colors.white,
-                    size: AppFontSize.s34,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  if (isRadioPlaying) {
-                    audioPlayer.pause();
-                    isRadioPlaying = false;
-                  } else {
-                    Components.showToast(
-                      msg: AppStrings.noThingToPause,
-                      fontSize: AppFontSize.s15,
-                      textColor: AppColors.tealColor,
+                    child: Icon(
+                      Icons.pause,
                       color: Colors.white,
-                    );
-                  }
-                },
-                child: Container(
-                  padding: EdgeInsets.all(AppSize.s10),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.redErrorColor,
-                        AppColors.tealColor,
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: const [
-                        0.3,
-                        1.0,
-                      ],
+                      size: AppFontSize.s34,
                     ),
                   ),
-                  child: Icon(
-                    Icons.pause,
-                    color: Colors.white,
-                    size: AppFontSize.s34,
-                  ),
-                ),
-              )
-            ],
-          )
-        ],
+                )
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
