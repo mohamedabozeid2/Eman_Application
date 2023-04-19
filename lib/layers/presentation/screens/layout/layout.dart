@@ -23,13 +23,7 @@ class _LayoutState extends State<Layout> {
         builder: (BuildContext context, BoxConstraints constraints) {
       Helper.maxWidth = constraints.maxWidth;
       Helper.maxHeight = constraints.maxHeight;
-      return const Scaffold(
-        // appBar: AppBar(
-        //   // title: const Text(AppStrings.appName),
-        //   toolbarHeight: Helper.maxHeight * 0.08,
-        // ),
-        body: /*MainScreen()*/SplashScreen(),
-      );
+      return const SplashScreen();
     });
   }
 }

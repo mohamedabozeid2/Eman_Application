@@ -6,6 +6,7 @@ import 'package:eman_application/core/utils/constants.dart';
 import 'package:eman_application/core/utils/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math' as math;
 
 import '../../../../core/utils/strings.dart';
 import '../../../../core/widgets/adaptive_indicator.dart';
@@ -78,7 +79,6 @@ class _MainScreenState extends State<MainScreen> {
                             .displaySmall!
                             .copyWith(color: Colors.white),
                       ),
-
                       toolbarHeight: Helper.maxHeight * 0.15,
                     ),
                     SliverToBoxAdapter(
@@ -121,74 +121,143 @@ class _MainScreenState extends State<MainScreen> {
                                       );
                               },
                             ),
-                            GridView.count(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1 / 1.3,
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              crossAxisSpacing: AppSize.s20,
-                              mainAxisSpacing: AppSize.s20,
+                            Row(
                               children: [
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.quran,
-                                    firstColor: tapsColors[11],
-                                    secondColor: tapsColors[1],
-                                    image: AssetsManager.appLogo,
-                                    pathWidget: QuranScreen(),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                          title: AppStrings.quran,
+                                          firstColor: tapsColors[11],
+                                          secondColor: tapsColors[1],
+                                          image: AssetsManager.appLogo,
+                                          pathWidget: QuranScreen(),
+                                        ),
+                                      ),
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                          title: AppStrings.radio,
+                                          firstColor: tapsColors[1],
+                                          secondColor: tapsColors[8],
+                                          image: AssetsManager.radio,
+                                          pathWidget: const RadioScreen(),
+                                        ),
+                                      ),
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                          title: AppStrings.qibla,
+                                          firstColor: tapsColors[3],
+                                          secondColor: tapsColors[1],
+                                          image: AssetsManager.praying,
+                                          pathWidget: const Qibla(),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.bookmarks,
-                                    firstColor: tapsColors[1],
-                                    secondColor: tapsColors[3],
-                                    image: AssetsManager.bookmarks,
-                                    pathWidget: const BookmarksScreen(),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                          title: AppStrings.bookmarks,
+                                          firstColor: tapsColors[1],
+                                          secondColor: tapsColors[3],
+                                          image: AssetsManager.bookmarks,
+                                          pathWidget: const BookmarksScreen(),
+                                        ),
+                                      ),
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                          title: AppStrings.tasbih,
+                                          firstColor: tapsColors[10],
+                                          secondColor: tapsColors[1],
+                                          image: AssetsManager.tasbih,
+                                          pathWidget: const Sebha(),
+                                        ),
+                                      ),
+                                      NavigatorTap(
+                                        navigatorTapModel: NavigatorTapModel(
+                                            title: AppStrings.azkar,
+                                            firstColor: tapsColors[10],
+                                            secondColor: tapsColors[11],
+                                            image: AssetsManager.moon,
+                                            pathWidget: const AzkarScreen()),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.radio,
-                                    firstColor: tapsColors[1],
-                                    secondColor: tapsColors[8],
-                                    image: AssetsManager.radio,
-                                    pathWidget: const RadioScreen(),
-                                  ),
-                                ),
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.tasbih,
-                                    firstColor: tapsColors[10],
-                                    secondColor: tapsColors[1],
-                                    image: AssetsManager.tasbih,
-                                    pathWidget: const Sebha(),
-                                  ),
-                                ),
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                    title: AppStrings.qibla,
-                                    firstColor: tapsColors[3],
-                                    secondColor: tapsColors[1],
-                                    image: AssetsManager.praying,
-                                    pathWidget: const Qibla(),
-                                  ),
-                                ),
-                                NavigatorTap(
-                                  navigatorTapModel: NavigatorTapModel(
-                                      title: AppStrings.azkar,
-                                      firstColor: tapsColors[10],
-                                      secondColor: tapsColors[11],
-                                      image: AssetsManager.moon,
-                                      pathWidget: const AzkarScreen()),
-                                ),
+                                )
                               ],
                             ),
+                            // GridView.count(
+                            //   crossAxisCount: 2,
+                            //   physics: const NeverScrollableScrollPhysics(),
+                            //   shrinkWrap: true,
+                            //   // childAspectRatio: calculateAspectRatio(),
+                            //   crossAxisSpacing: AppSize.s20,
+                            //   mainAxisSpacing: AppSize.s20,
+                            //   children: [
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //         title: AppStrings.quran,
+                            //         firstColor: tapsColors[11],
+                            //         secondColor: tapsColors[1],
+                            //         image: AssetsManager.appLogo,
+                            //         pathWidget: QuranScreen(),
+                            //       ),
+                            //     ),
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //         title: AppStrings.bookmarks,
+                            //         firstColor: tapsColors[1],
+                            //         secondColor: tapsColors[3],
+                            //         image: AssetsManager.bookmarks,
+                            //         pathWidget: const BookmarksScreen(),
+                            //       ),
+                            //     ),
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //         title: AppStrings.radio,
+                            //         firstColor: tapsColors[1],
+                            //         secondColor: tapsColors[8],
+                            //         image: AssetsManager.radio,
+                            //         pathWidget: const RadioScreen(),
+                            //       ),
+                            //     ),
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //         title: AppStrings.tasbih,
+                            //         firstColor: tapsColors[10],
+                            //         secondColor: tapsColors[1],
+                            //         image: AssetsManager.tasbih,
+                            //         pathWidget: const Sebha(),
+                            //       ),
+                            //     ),
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //         title: AppStrings.qibla,
+                            //         firstColor: tapsColors[3],
+                            //         secondColor: tapsColors[1],
+                            //         image: AssetsManager.praying,
+                            //         pathWidget: const Qibla(),
+                            //       ),
+                            //     ),
+                            //     NavigatorTap(
+                            //       navigatorTapModel: NavigatorTapModel(
+                            //           title: AppStrings.azkar,
+                            //           firstColor: tapsColors[10],
+                            //           secondColor: tapsColors[11],
+                            //           image: AssetsManager.moon,
+                            //           pathWidget: const AzkarScreen()),
+                            //     ),
+                            //   ],
+                            // ),
+                            // SizedBox(
+                            //   height: AppSize.s20,
+                            // ),
                             SizedBox(
-                              height: AppSize.s20,
-                            ),
-                            AspectRatio(
-                              aspectRatio: 1.6,
+                              width: Helper.maxWidth * 0.8,
                               child: NavigatorTap(
                                 navigatorTapModel: NavigatorTapModel(
                                   title: AppStrings.sealOfTheQuran,
@@ -199,9 +268,9 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: AppSize.s20,
-                            ),
+                            // SizedBox(
+                            //   height: AppSize.s20,
+                            // ),
                           ],
                         ),
                       ),
@@ -211,5 +280,55 @@ class _MainScreenState extends State<MainScreen> {
         },
       ),
     );
+  }
+
+  double calculateAspectRatio() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Calculate the available width and height for the grid items
+    final availableWidth =
+        screenWidth - 16 * 2; // Subtract the padding on both sides
+    final availableHeight =
+        screenHeight - 16 * 2; // Subtract the padding on both sides
+
+    // Calculate the aspect ratio based on the available width and height
+    final aspectRatio = availableWidth / availableHeight;
+
+    // Calculate the height of the child widgets based on the aspect ratio
+    final childHeight = availableWidth /
+        _calculateColumnCount(context) *
+        _calculateRowHeight(context, aspectRatio);
+
+    // Adjust the aspect ratio based on the height of the child widgets
+    final adjustedAspectRatio = availableWidth / childHeight;
+
+    // Clamp the aspect ratio to an acceptable range
+    final clampedAspectRatio = math.max(
+      math.min(adjustedAspectRatio, 1.5),
+      0.5,
+    );
+
+    return clampedAspectRatio;
+  }
+
+  int _calculateColumnCount(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    // Calculate the number of columns based on the screen size
+    final columnCount = (screenWidth / 120)
+        .floor(); // Replace 120 with the width of your grid items
+
+    return columnCount;
+  }
+
+  double _calculateRowHeight(BuildContext context, double aspectRatio) {
+    final columnCount = _calculateColumnCount(context);
+
+    // Calculate the height of each row based on the aspect ratio and number of columns
+    final rowHeight = (120 * columnCount) /
+        aspectRatio; // Replace 120 with the height of your grid items
+
+    return rowHeight;
   }
 }

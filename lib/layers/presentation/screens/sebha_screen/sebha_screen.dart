@@ -38,122 +38,125 @@ class _SebhaState extends State<Sebha> {
         toolbarHeight: Helper.maxHeight * 0.1,
         title: const Text(AppStrings.sebha),
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              BlocConsumer<MainCubit, MainStates>(
-                buildWhen: (previous, current) =>
-                    current is MainTaspehSuccessState,
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return Container(
-                    height: Helper.maxHeight * 0.1,
-                    width: Helper.maxWidth * 0.8,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(colors: [
-                          AppColors.mainColor.withOpacity(0.5),
-                          AppColors.backgroundColor,
-                        ]),
-                        borderRadius: BorderRadius.circular(AppSize.s30)),
-                    child: Text(
-                      taspehData[taspehCounter],
-                      textDirection: TextDirection.rtl,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(color: Colors.white),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: AppSize.s20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  counter++;
-                  if (MainCubit.get(context).taspehCount(counter: counter)) {
-                    taspehCounter++;
-                    counter = 0;
-                    if (taspehCounter == taspehData.length) {
-                      taspehCounter = 0;
-                    }
-                  }
-                },
-                child: SizedBox(
-                  height: Helper.maxHeight * 0.3,
-                  child: Image.asset(AssetsManager.sebha),
+      body: Center(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                BlocConsumer<MainCubit, MainStates>(
+                  buildWhen: (previous, current) =>
+                      current is MainTaspehSuccessState,
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return Container(
+                      height: Helper.maxHeight * 0.1,
+                      width: Helper.maxWidth * 0.8,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(colors: [
+                            AppColors.mainColor.withOpacity(0.5),
+                            AppColors.backgroundColor,
+                          ]),
+                          borderRadius: BorderRadius.circular(AppSize.s30)),
+                      child: Text(
+                        taspehData[taspehCounter],
+                        textDirection: TextDirection.rtl,
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(color: Colors.white),
+                      ),
+                    );
+                  },
                 ),
-              ),
-              SizedBox(
-                height: AppSize.s20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  BlocConsumer<MainCubit, MainStates>(
-                    buildWhen: (previous, current) =>
-                        current is MainTaspehSuccessState,
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      return Container(
+                SizedBox(
+                  height: AppSize.s20,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    counter++;
+                    if (MainCubit.get(context).taspehCount(counter: counter)) {
+                      taspehCounter++;
+                      counter = 0;
+                      if (taspehCounter == taspehData.length) {
+                        taspehCounter = 0;
+                      }
+                    }
+                  },
+                  child: SizedBox(
+                    height: Helper.maxHeight * 0.3,
+                    child: Image.asset(AssetsManager.sebha),
+                  ),
+                ),
+                SizedBox(
+                  height: AppSize.s20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BlocConsumer<MainCubit, MainStates>(
+                      buildWhen: (previous, current) =>
+                          current is MainTaspehSuccessState,
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        return Container(
+                          padding: EdgeInsets.all(AppSize.s20),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppSize.s30),
+                            gradient: LinearGradient(
+                                colors: [
+                                  AppColors.mainColor.withOpacity(0.5),
+                                  AppColors.backgroundColor,
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight),
+                          ),
+                          child: Text(
+                            counter.toString(),
+                            style:
+                                Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                      color: Colors.white,
+                                    ),
+                          ),
+                        );
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        taspehCounter = 0;
+                        counter = 0;
+                        setState(() {});
+                      },
+                      child: Container(
                         padding: EdgeInsets.all(AppSize.s20),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(AppSize.s30),
                           gradient: LinearGradient(
-                              colors: [
-                                AppColors.mainColor.withOpacity(0.5),
-                                AppColors.backgroundColor,
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight),
+                            colors: [
+                              AppColors.mainColor.withOpacity(0.5),
+                              AppColors.backgroundColor,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                         ),
                         child: Text(
-                          counter.toString(),
+                          AppStrings.reset,
                           style:
                               Theme.of(context).textTheme.bodyLarge!.copyWith(
                                     color: Colors.white,
                                   ),
                         ),
-                      );
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      taspehCounter = 0;
-                      counter = 0;
-                      setState(() {});
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(AppSize.s20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(AppSize.s30),
-                        gradient: LinearGradient(
-                          colors: [
-                            AppColors.mainColor.withOpacity(0.5),
-                            AppColors.backgroundColor,
-                          ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
                       ),
-                      child: Text(
-                        AppStrings.reset,
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: Colors.white,
-                            ),
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

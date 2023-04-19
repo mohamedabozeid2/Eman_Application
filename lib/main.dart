@@ -27,7 +27,6 @@ void main() async {
   await CheckConnection.checkConnection().then((value) {
     internetConnection = value;
   });
-
   EmanDioHelper.init();
   RadioDioHelper.init();
   AudioDioHelper.init();
@@ -53,7 +52,7 @@ void main() async {
   late Widget startWidget;
 
   if (!isQuranDownloaded && !internetConnection) {
-    startWidget = NoInternetScreen();
+    startWidget = const NoInternetScreen();
   } else {
     startWidget = const Layout();
   }
