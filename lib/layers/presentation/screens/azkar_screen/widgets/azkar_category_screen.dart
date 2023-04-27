@@ -50,7 +50,7 @@ class AzkarCategoryScreen extends StatelessWidget {
                             padding: EdgeInsets.all(AppSize.s7),
                             child: Text(
                               azkarCategory[index].content,
-                              textAlign: TextAlign.start,
+                              textAlign: TextAlign.center,
                               textDirection: TextDirection.rtl,
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Colors.white
@@ -66,7 +66,7 @@ class AzkarCategoryScreen extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   azkarCategory[index].description,
-                                  textAlign: TextAlign.end,
+                                  textAlign: TextAlign.center,
                                   textDirection: TextDirection.rtl,
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                       color: Colors.white
@@ -82,7 +82,7 @@ class AzkarCategoryScreen extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   azkarCategory[index].reference,
-                                  textAlign: TextAlign.end,
+                                  textAlign: TextAlign.center,
                                   textDirection: TextDirection.rtl,
                                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                       color: Colors.white
