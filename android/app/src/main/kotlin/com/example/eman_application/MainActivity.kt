@@ -1,4 +1,4 @@
-package com.example.eman_application
+package com.abozeid.emanzone
 
 import io.flutter.embedding.android.FlutterActivity
 
